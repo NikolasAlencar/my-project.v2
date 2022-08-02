@@ -6,6 +6,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 //import { AuthorizationModule } from '../authorization/authorization.module';
 
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     // NoDataModule,
     ReactiveFormsModule,
     // AuthorizationModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressBarModule
   ],
   exports: [
     // PoModule,
@@ -21,6 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     // NoDataModule,
     ReactiveFormsModule,
     // AuthorizationModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressBarModule
   ],
 })
 export class SharedModule {}

@@ -57,11 +57,14 @@
         </div>
 
         <!-- <spinner-load *ngIf="spinnerLoad"></spinner-load> -->
-        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        <mat-progress-bar
+          mode="indeterminate"
+          *ngIf="loading"
+        ></mat-progress-bar>
         <div class="botoes" *ngIf="!loading">
           <div class="button">
             <div class="img">
-              <img src="../../assets/img/cadeado.png" />
+              <img src="../../assets/img/cadeado.png"/>
             </div>
             <div (click)="entrar()">
               <button class="entrar" type="submit">Entrar</button>
