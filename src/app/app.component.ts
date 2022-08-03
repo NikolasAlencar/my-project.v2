@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, pipe, pluck, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'my-project.v2';
 
-  hasHeader: any;
+  hasHeader: boolean = true;
 
-  constructor(public route: ActivatedRoute){
-    this.route.data.subscribe(header => {
-      this.hasHeader = header
-      console.log(header)
-    })
+  constructor(public route: ActivatedRoute){}
+
+  ngOnInit(): void {
   }
-
-  ngOnInit(): void {}
 }
 
 

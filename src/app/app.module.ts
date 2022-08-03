@@ -8,11 +8,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoginModule } from "./login/login.module";
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { TesteComponent } from './teste/teste.component';
+
+import { MatSidenavModule } from "@angular/material/sidenav"
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
-  imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot([]), BrowserAnimationsModule, LoginModule, MatToolbarModule, MatIconModule],
+  declarations: [AppComponent, HeaderComponent, TesteComponent],
+  imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot([]), MatSidenavModule, BrowserAnimationsModule, LoginModule, MatToolbarModule, MatIconModule],
   providers: [],
   bootstrap: [AppComponent]
 })

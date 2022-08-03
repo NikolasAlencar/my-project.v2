@@ -8,7 +8,6 @@
             <mat-radio-button
               *ngFor="let acao of acoes"
               value="{{ acao.opcao }}"
-              (click)="click(acao.opcao)"
               >{{ acao.nome }}</mat-radio-button
             >
           </mat-radio-group>
@@ -17,15 +16,11 @@
             <input
               matInput
               [placeholder]=opcaoSelecionada.descricao
-              formControlName="campo"
+              [formControlName]=opcaoSelecionada.nome
               required
             />
             <mat-error
-              *ngIf="
-                !consultar.get('campo')?.valid &&
-                consultar.get('campo')?.touched &&
-                opcaoSelecionada.erro
-              "
+
               class="form-text text-danger"
               >{{ opcaoSelecionada.erro }}</mat-error
             >
@@ -45,3 +40,24 @@
     </form>
   </div>
 </div>
+
+<ng-template #agenciaConta> <!-- Arrumar depois -->
+  <mat-form-field appearance="fill">
+    <mat-label>{{ opcaoSelecionada.nome }}</mat-label>
+    <input
+      matInput
+      [placeholder]=opcaoSelecionada.descricao
+      formControlName="campo"
+      required
+    />
+    <mat-error
+      *ngIf="
+        !consultar.get('campo')?.valid &&
+        consultar.get('campo')?.touched &&
+        opcaoSelecionada.erro
+      "
+      class="form-text text-danger"
+      >{{ opcaoSelecionada.erro }}</mat-error
+    >
+  </mat-form-field>
+</ng-template>

@@ -25,13 +25,6 @@
               class="form-text text-danger"
               >Por favor, digite o seu usuário corretamente!</mat-error
             >
-            <small
-              *ngIf="
-                login.get('usuario')?.valid && login.get('usuario')?.touched
-              "
-              class="form-text text-success"
-              >Ok.</small
-            >
           </mat-form-field>
           <mat-form-field class="last">
             <mat-label>senha</mat-label>
@@ -48,11 +41,6 @@
               class="form-text text-danger"
               >Por favor, digite a sua senha corretamente!</mat-error
             >
-            <small
-              *ngIf="login.get('senha')?.valid && login.get('senha')?.touched"
-              class="form-text text-success"
-              >Ok.</small
-            >
           </mat-form-field>
         </div>
 
@@ -64,7 +52,7 @@
         <div class="botoes" *ngIf="!loading">
           <div class="button">
             <div class="img">
-              <img src="../../assets/img/cadeado.png"/>
+              <img src="../../assets/img/cadeado.png" />
             </div>
             <div (click)="entrar()">
               <button class="entrar" type="submit">Entrar</button>

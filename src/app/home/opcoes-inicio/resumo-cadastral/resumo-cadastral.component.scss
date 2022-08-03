@@ -1,0 +1,72 @@
+mat-card{
+  font-size: 0.9rem
+}
+
+.botao{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coluna{
+  margin-right: 0.5rem;
+}
+
+.principal{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title{
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.subtitle{
+  font-weight: bold;
+}
+
+.legenda-green {
+  border-radius: 100%;
+  height: 0.9rem;
+  width: 0.9rem;
+  background-color: #388e3c;
+  display: flex;
+}
+
+.legenda-red{
+  border-radius: 100%;
+  height: 0.9rem;
+  width: 0.9rem;
+  background-color: #c62828;
+  display: flex;
+}
+
+.legenda-grey{
+  border-radius: 100%;
+  height: 0.9rem;
+  width: 0.9rem;
+  background-color: #bdbdbd;
+  display: flex;
+}
+
+.legenda-yellow{
+  border-radius: 100%;
+  height: 0.9rem;
+  width: 0.9rem;
+  background-color: #FFD54F;
+  display: flex;
+}
+
+.ver-legenda{
+  background: linear-gradient(90deg, #000537 60%, #2d2e62 100%);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-right: 0.9px;
+}
+
+
+
+
