@@ -37,9 +37,9 @@ export class ConsultaComponent implements OnInit {
   //private urlAtual = this.route.snapshot.url.join('');
 
   public pesquisar() {
-    if (this.consultar.valid === false) {
-      this.consultar.markAllAsTouched();
-    } else {
+    //if (this.consultar.valid === false) {
+      //this.consultar.markAllAsTouched();
+    //} else {
       this.consultar.markAsUntouched();
       this.loading = true;
       //this.telaInicioService.consultar(this.opcaoSelecionada, this.valorDigitado)
@@ -47,7 +47,7 @@ export class ConsultaComponent implements OnInit {
         this.loading = false;
         this.router.navigate(["/home"]);
       }, 3000);
-    }
+    //}
   }
   ngOnInit(): void {
     this.consultar.get('radio')?.valueChanges.subscribe(() => {this.opcaoSelecionada = this.acoes[this.consultar.get('radio')?.value-1]

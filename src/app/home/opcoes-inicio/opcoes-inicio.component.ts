@@ -10,9 +10,7 @@ export class OpcoesInicioComponent implements OnInit {
   //   private loginService: LoginService,
   //   private outlet: RouterOutlet
   {}
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
+  ngOnInit(): void {}
 
   public opcoes: Array<any> = [
     { nome: "Dados pessoais", id: 1, path: "" },

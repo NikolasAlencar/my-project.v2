@@ -15,15 +15,13 @@
             <mat-label>{{ opcaoSelecionada.nome }}</mat-label>
             <input
               matInput
-              [placeholder]=opcaoSelecionada.descricao
-              [formControlName]=opcaoSelecionada.nome
+              [placeholder]="opcaoSelecionada.descricao"
+              [formControlName]="opcaoSelecionada.nome"
               required
             />
-            <mat-error
-
-              class="form-text text-danger"
-              >{{ opcaoSelecionada.erro }}</mat-error
-            >
+            <mat-error class="form-text text-danger">{{
+              opcaoSelecionada.erro
+            }}</mat-error>
           </mat-form-field>
         </div>
         <!-- <spinner-load *ngIf="spinnerLoad"></spinner-load> -->
@@ -41,12 +39,13 @@
   </div>
 </div>
 
-<ng-template #agenciaConta> <!-- Arrumar depois -->
+<ng-template #agenciaConta>
+  <!-- Arrumar depois -->
   <mat-form-field appearance="fill">
     <mat-label>{{ opcaoSelecionada.nome }}</mat-label>
     <input
       matInput
-      [placeholder]=opcaoSelecionada.descricao
+      [placeholder]="opcaoSelecionada.descricao"
       formControlName="campo"
       required
     />
