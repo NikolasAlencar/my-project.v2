@@ -1,23 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-historico',
-  templateUrl: './historico.component.html',
-  styleUrls: ['./historico.component.scss']
+  selector: "app-historico",
+  templateUrl: "./historico.component.html",
+  styleUrls: ["./historico.component.scss"]
 })
 export class HistoricoComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  public bloquear(): void{
-    console.log('BLOQUEAR')
+  public bloquear(): void {
+    console.log("BLOQUEAR");
   }
 
-  public liberar(): void{
-    console.log('LIBERAR')
+  public liberar(): void {
+    console.log("LIBERAR");
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

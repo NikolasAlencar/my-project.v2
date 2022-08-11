@@ -1,6 +1,10 @@
-<div class="principal">
-  <div class="title">Resetar senha</div>
-  <input class="form-control input-cpf" type="text" placeholder="Motivo da solicitação de reset de senha" aria-label="default input example">
-  <button class="btn btn-primary resetar" type="button" (click)="resetar()">Resetar</button>
+<mat-card>
+  <mat-label>Resetar senha</mat-label>
+  <div class="principal">
+  <mat-form-field appearance="outline">
+    <mat-label>Motivo da solicitação de reset de senha</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
 </div>
-
+  <button mat-raised-button color="primary">Resetar</button>
+</mat-card>

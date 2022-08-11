@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     // AuthorizationModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule
   ],
   exports: [
     // PoModule,
@@ -30,7 +34,9 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     // AuthorizationModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule
   ],
 })
 export class SharedModule {}

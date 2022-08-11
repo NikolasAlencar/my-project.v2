@@ -1,34 +1,17 @@
 <mat-card>
-  <mat-form-field appearance="fill">
-    <mat-label>Input</mat-label>
-    <input matInput />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
+  <div class="title">Enviar para</div>
+  <div class="principal">
+    <mat-form-field appearance="outline">
+      <mat-label>Selecione o setor de envio</mat-label>
+      <mat-select>
+        <mat-option value="1">Riscos</mat-option>
+        <mat-option value="2">Backoffice</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Descrição do motivo do envio</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </div>
+    <button mat-raised-button color="primary" type="button">Enviar</button>
 </mat-card>
-<!-- <mat-card>
-    <div class="title">Enviar para</div>
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Selecione o setor de envio</option>
-      <option value="1">Riscos</option>
-      <option value="2">Backoffice</option>
-    </select>
-    <input
-      class="form-control input-cpf"
-      type="text"
-      placeholder="Descrição do motivo do envio"
-      aria-label="default input example"
-    />
-    <button class="btn btn-primary enviar" type="button" (click)="enviar()">
-      Enviar
-    </button>
-</mat-card> -->

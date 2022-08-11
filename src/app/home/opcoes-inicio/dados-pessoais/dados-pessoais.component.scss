@@ -1,21 +1,12 @@
-.primary{
+.inferior{
   display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-.secondary{
-  padding: 10px;
-  border-style: solid;
-  border-color: rgba(128, 128, 128, 0.24);
-  border-radius: 4px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.144);
-  width: 100%;
-  margin: 5px;
-}
-
-.tertiary{
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
+}
+
+app-enviar-para{
+  width: 100%;
+}
+
+app-reset-senha{
+  width: 100%;
 }

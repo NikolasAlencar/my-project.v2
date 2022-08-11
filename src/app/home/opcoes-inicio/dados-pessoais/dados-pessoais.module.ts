@@ -7,19 +7,19 @@ import { EnviarParaComponent } from "./enviar-para/enviar-para.component";
 import { HistoricoComponent } from "./historico/historico.component";
 import { ResetSenhaComponent } from "./reset-senha/reset-senha.component";
 
-import { MatCardModule } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
+import { SharedModule } from "src/app/shared/shared.module";
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     DadosPessoaisComponent,
     ContaDigitalComponent,
     DadosComponent,
-    EnviarParaComponent,
     HistoricoComponent,
-    ResetSenhaComponent
+    ResetSenhaComponent,
+    EnviarParaComponent
   ],
-  imports: [CommonModule, MatCardModule, MatFormFieldModule, MatSelectModule]
+  imports: [CommonModule, MatSelectModule, SharedModule, MatTableModule]
 })
 export class DadosPessoaisModule {}

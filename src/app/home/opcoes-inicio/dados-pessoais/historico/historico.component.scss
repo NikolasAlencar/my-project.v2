@@ -1,14 +1,4 @@
-.principal{
-  border-bottom: 2px solid rgba(128, 128, 128, 0.24);
-  margin: 5px;
-  background-color: white;
-  padding: 10px;
-  border-style: solid;
-  border-color: rgba(128, 128, 128, 0.24);
-  border-radius: 4px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.144);
-  font-size: 15px;
-}
+
 
 .secondary{
   display: flex;
@@ -17,66 +7,58 @@
   align-items: center;
 }
 
+.principal{
+  padding: 1rem;
+}
+
 .historico-bottom-title{
-  color: #000537;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 1.3rem;
 }
 
 .historico-bottom{
-  color: #000537;
-  margin-top: 50px;
-}
-
-.title{
-  width: 100%;
-  background: linear-gradient(90deg, #000537 60%, #2d2e62 100%);
-  color: white;
-  padding: 12px 23px 12px 23px;
-  font-weight: bold;
-  border-radius: 4px;
+  margin-top: 3rem;
 }
 
 .subtitle{
   font-weight: bold;
-  font-size: 12px;
+  font-size: 0.8rem;
 }
 
 img{
   border-radius: 100%;
-  height: 14px;
-  width: 14px;
-  margin-top: 20px;
+  height: 0.9rem;
+  width: 0.9rem;
+  margin-top: 1.3rem;
 }
 
 .item-coluna{
-  color: rgba(0, 0, 0, 0.87);
-  margin-top: 10px;
+  margin-top: 0.6rem;
 }
 
 .coluna{
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 1.3rem;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 1.9rem;
 }
 
 .first-coluna{
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
-  margin-left: 30px;
+  margin-top: 1.9rem;
+  margin-left: 1.9rem;
 }
 
 .last-coluna{
   display: flex;
   flex-direction: column;
-  margin-top: 35px;
+  margin-top: 2rem;
   font-weight: bold;
   align-items: center;
-  margin-left: 30px;
-  margin-right: 50px;
+  margin-left: 1.9rem;
+  margin-right: 3rem;
 }
 
 .green {
@@ -85,4 +67,20 @@ img{
 
 .red{
   color: #c62828;
+}
+
+mat-card{
+  margin: 0.5rem;
+  padding: 0 !important;
+}
+
+table{
+  width: 100%;
+}
+
+.cabecalho{
+  background-color: #c2185b;
+  border-radius: 0.3rem 0.3rem 0rem 0rem;
+  padding: 1rem;
+  font-size: 1rem;
 }

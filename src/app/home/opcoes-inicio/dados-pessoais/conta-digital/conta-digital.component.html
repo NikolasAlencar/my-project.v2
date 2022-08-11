@@ -1,19 +1,25 @@
-<div class="subtitle">Conta digital</div>
-<div class="primary">
-    <div>
-        <label class="title-item">Cadastro iniciado em</label>
-        <label class="form-control result-item">{{ clienteConsultado.cadastroIniciadoEm }}</label>
+<mat-card>
+  <div class="subtitle">Conta digital</div>
+  <div class="primary">
+    <div class="divs">
+      <mat-label class="title-item">Cadastro iniciado em</mat-label>
+      <mat-label class="result-item">{{
+        clienteConsultado.cadastroIniciadoEm
+      }}</mat-label>
     </div>
-    <div>
-        <label class="title-item">Agência</label>
-        <label class="form-control result-item">{{ clienteConsultado.agencia }}</label>
+    <div class="divs">
+      <mat-label class="title-item">Agência</mat-label>
+      <mat-label class="result-item">{{ clienteConsultado.agencia }}</mat-label>
     </div>
-    <div>
-        <label class="title-item">Conta corrente</label>
-        <label class="form-control result-item">{{ clienteConsultado.conta }}</label>
+    <div class="divs">
+      <mat-label class="title-item">Conta corrente</mat-label>
+      <mat-label class="result-item">{{ clienteConsultado.conta }}</mat-label>
     </div>
-</div>
-<div class="secondary">
-    <label class="title-item">Cadastro criado em</label>
-    <label class="form-control result-item">{{ clienteConsultado.cadastroCriadoEm }}</label>
-</div>
+    <div class="divs">
+      <mat-label class="title-item">Cadastro criado em</mat-label>
+      <mat-label class="result-item">{{
+        clienteConsultado.cadastroCriadoEm
+      }}</mat-label>
+    </div>
+  </div>
+</mat-card>

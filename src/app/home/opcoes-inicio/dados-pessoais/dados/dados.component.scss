@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   color: rgba(0, 0, 0, .38);
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
 }
 
 .nome-completo{
   width: 100%;
-  margin-left: 15px;
+  margin-left: 0.9rem;
 }
 
 .result-item-black{
@@ -20,43 +20,43 @@
 }
 
 .subtitle{
-  font-size: 15px;
+  font-size: 0.9rem;
   font-weight: bold;
-  margin-top: 30px;
+  margin-top: 1.9rem;
 }
 
 .secondary{
   color: rgba(0, 0, 0, .38);
-  font-size: 14px;
-  margin-top: 8px;
-  margin-top: 5px;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  margin-top: 0.3rem;
 }
 
 .title-item{
   display: inline-block;
-  font-size: 10px;
-  margin-left: 5px;
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
 }
 
 .result-item{
-  padding: 10px;
+  padding: 0.6rem;
   border-style: solid;
-  border-radius: 4px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.144);
+  border-radius: 0.3rem;
+  box-shadow: 0.06rem 0.06rem 0.06rem 0.06rem rgba(0, 0, 0, 0.144);
 }
 
 .botao{
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 40px;
+  margin-top: 3rem;
 }
 
 .atualizar{
   background: linear-gradient(90deg, #000537 60%, #2d2e62 100%);
   font-weight: 500;
-  font-size: 14px;
-  margin-right: 10px;
+  font-size: 0.9rem;
+  margin-right: 0.6rem;
 }
 
 input.ng-invalid.ng-touched{
