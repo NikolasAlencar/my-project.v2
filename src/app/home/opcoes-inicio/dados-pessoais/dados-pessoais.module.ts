@@ -9,7 +9,9 @@ import { ResetSenhaComponent } from "./reset-senha/reset-senha.component";
 
 import { MatSelectModule } from "@angular/material/select";
 import { SharedModule } from "src/app/shared/shared.module";
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from "@angular/material/table";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -18,8 +20,8 @@ import {MatTableModule} from '@angular/material/table';
     DadosComponent,
     HistoricoComponent,
     ResetSenhaComponent,
-    EnviarParaComponent,
+    EnviarParaComponent
   ],
-  imports: [CommonModule, MatSelectModule, SharedModule, MatTableModule]
+  imports: [CommonModule, MatSelectModule, SharedModule, MatTableModule, MatGridListModule, FlexLayoutModule]
 })
 export class DadosPessoaisModule {}

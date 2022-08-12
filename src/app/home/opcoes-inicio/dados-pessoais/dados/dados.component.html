@@ -3,6 +3,7 @@
   <mat-card class="mat-card-borda">
     <label>Dados pessoais</label>
     <div class="separator">
+      <div class="duo">
       <mat-form-field appearance="outline">
         <mat-label>Id</mat-label>
         <input matInput placeholder="Entre com o seu usuário" required />
@@ -27,6 +28,8 @@
           >Por favor, digite o seu nome completo!</mat-error
         >
       </mat-form-field>
+    </div>
+    <div class="duo">
       <mat-form-field appearance="outline">
         <mat-label>CPF</mat-label>
         <input
@@ -52,7 +55,8 @@
           >Por favor, digite o seu usuário corretamente!</mat-error
         >
       </mat-form-field>
-
+    </div>
+    <div class="duo">
       <mat-form-field appearance="outline">
         <mat-label>Nome da mãe</mat-label>
         <input
@@ -87,11 +91,13 @@
         >
       </mat-form-field>
     </div>
+    </div>
   </mat-card>
   <!--Endereço-->
   <mat-card formGroupName="endereco" class="mat-card-borda">
     <label>Endereço</label>
     <div class="separator">
+      <div class="duo">
       <mat-form-field appearance="outline">
         <mat-label>Cep</mat-label>
         <input
@@ -126,6 +132,8 @@
           >Por favor, digite corretamente o seu logradouro!</mat-error
         >
       </mat-form-field>
+    </div>
+    <div>
       <mat-form-field appearance="outline">
         <mat-label>Número</mat-label>
         <input
@@ -160,6 +168,8 @@
           >Por favor, digite corretamente o seu complemento!</mat-error
         >
       </mat-form-field>
+    </div>
+    <div>
       <mat-form-field appearance="outline">
         <mat-label>Bairro</mat-label>
         <input
@@ -195,6 +205,7 @@
           >Por favor, digite corretamente o nome da sua cidade!</mat-error
         >
       </mat-form-field>
+    </div>
       <mat-form-field appearance="outline">
         <mat-label>Estado</mat-label>
         <input

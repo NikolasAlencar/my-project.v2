@@ -1,9 +1,28 @@
 .separator{
   display: flex;
-  justify-content: space-between;
+}
+
+.duo{
+
+}
+
+mat-form-field{
+  margin: 1rem;
 }
 
 mat-card{
   margin: 0rem 0.5rem 0.5rem 0.5rem;
+}
+
+@media(max-width: 451px){
+  mat-form-field{
+    margin: 0;
+  }
+}
+
+@media(max-width: 498px){
+  .separator{
+    flex-direction: column;
+  }
 }
 

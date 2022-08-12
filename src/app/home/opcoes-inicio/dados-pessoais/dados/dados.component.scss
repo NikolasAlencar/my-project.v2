@@ -1,6 +1,6 @@
 .botao{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 mat-card{
@@ -10,5 +10,25 @@ mat-card{
 .separator{
   display: flex;
   justify-content: space-between;
+}
+
+
+.duo{
+}
+
+mat-form-field{
+  margin: 1rem;
+}
+
+@media(max-width: 451px){
+  mat-form-field{
+    margin: 0;
+  }
+}
+
+@media(max-width: 969px){
+  .separator{
+    flex-direction: column;
+  }
 }
 
