@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { Cols } from "src/assets/model/Cols";
+import { ajustaGrid } from "src/assets/util/ajustaGrid";
 
 @Component({
   selector: "app-dados",
@@ -7,6 +9,14 @@ import { FormBuilder, Validators } from "@angular/forms";
   styleUrls: ["./dados.component.scss"]
 })
 export class DadosComponent implements OnInit {
+  
+  public innerWidth = ajustaGrid()
+
+  @HostListener("window:resize")
+  onResize() {
+    this.innerWidth = ajustaGrid()
+  }
+
   constructor(
     // private telaInicioService: TelaInicioService,
     private fb: FormBuilder

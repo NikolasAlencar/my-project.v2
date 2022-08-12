@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { MediaObserver } from "@angular/flex-layout";
-import { Observable, map, startWith, tap  } from "rxjs";
+import { Component, HostListener, OnInit } from "@angular/core";
+import { Cols } from "src/assets/model/Cols";
+import { ajustaGrid } from "src/assets/util/ajustaGrid";
 
 @Component({
   selector: "app-conta-digital",
@@ -8,8 +8,15 @@ import { Observable, map, startWith, tap  } from "rxjs";
   styleUrls: ["./conta-digital.component.scss"]
 })
 export class ContaDigitalComponent implements OnInit {
-  constructor()
-  // public telaInicioService: TelaInicioService,private observableMedia: MediaObserver,
+
+  public innerWidth = ajustaGrid()
+
+  @HostListener("window:resize")
+  onResize() {
+    this.innerWidth = ajustaGrid()
+  }
+
+  constructor() // public telaInicioService: TelaInicioService,private observableMedia: MediaObserver,
   // private consultarService: ConsultarService,
   // private subscriberService: SubscriberService
   {
@@ -17,8 +24,6 @@ export class ContaDigitalComponent implements OnInit {
     //   this.clienteConsultado = data;
     // });
   }
-
-  ;;public cols: Observable<any> | undefined;
 
   public clienteConsultado: any = {
     id: 1,
@@ -44,14 +49,14 @@ export class ContaDigitalComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log(window.screen.width)
+    console.log(window.screen.width);
     //this.clienteConsultado = this.consultarService.clienteConsultado[0];
     // const grid = new Map([
-    //   ["xs", 10],
-    //   ["sm", 5],
-    //   ["md", 4],
-    //   ["lg", 5],
-    //   ["xl", 6]
+    //   ["xs", 1],
+    //   ["sm", 2],
+    //   ["md", 3],
+    //   ["lg", 4],
+    //   ["xl", 5]
     // ]);
     // let start: any;
     // grid.forEach((cols, mqAlias) => {
