@@ -18,7 +18,7 @@ import {MatTableModule} from '@angular/material/table';
     DadosComponent,
     HistoricoComponent,
     ResetSenhaComponent,
-    EnviarParaComponent
+    EnviarParaComponent,
   ],
   imports: [CommonModule, MatSelectModule, SharedModule, MatTableModule]
 })

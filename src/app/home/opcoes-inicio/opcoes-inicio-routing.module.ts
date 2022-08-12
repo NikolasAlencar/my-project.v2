@@ -11,6 +11,14 @@ const routes: Routes = [
     component: HomeComponent,
     children: [{ path: "dados-pessoais", component: DadosPessoaisComponent }, { path: "crivo", component: CrivoComponent }]
   }
+  // {
+  //   path: "dados-pessoais",
+  //   component: DadosPessoaisComponent
+  // },
+  // {
+  //   path: "crivo",
+  //   component: CrivoComponent
+  // }
 ];
 
 @NgModule({

@@ -1,289 +1,220 @@
-<!-- <div class="subtitle">Dados pessoais</div>
+<!--Dados pessoais-->
 <form [formGroup]="formulario" novalidate (ngSubmit)="confirmar()">
-  <div class="primary">
-    <div>
-      <label class="title-item">ID</label>
-      <label class="form-control result-item">{{ clienteConsultado.id }}</label>
-    </div>
-    <div class="nome-completo result-item-black">
-      <label class="title-item">Nome completo</label>
-      <input
-        formControlName="nomeCompleto"
-        class="form-control result-item"
-        placeholder="Digite o seu nome completo"
-      />
-      <small
-        *ngIf="
-          !formulario.get('nomeCompleto')?.valid &&
-          formulario.get('nomeCompleto')?.touched
-        "
-        class="form-text text-danger"
-        >Por favor, digite corretamente o seu nome completo.</small
-      >
-      <small
-        *ngIf="
-          formulario.get('nomeCompleto')?.valid &&
-          formulario.get('nomeCompleto')?.touched
-        "
-        class="form-text text-success"
-        >Ok.</small
-      >
-    </div>
-  </div>
-  <div class="primary result-item-black">
-    <div>
-      <label class="title-item">CPF</label>
-      <input
-        formControlName="cpf"
-        class="form-control result-item"
-        placeholder="Digite o seu CPF"
-      />
-      <small
-        *ngIf="!formulario.get('cpf')?.valid && formulario.get('cpf')?.touched"
-        class="form-text text-danger"
-        >Por favor, digite corretamente o seu CPF.</small
-      >
-      <small
-        *ngIf="formulario.get('cpf')?.valid && formulario.get('cpf')?.touched"
-        class="form-text text-success"
-        >Ok.</small
-      >
-    </div>
-    <div>
-      <label class="title-item">Data de nascimento</label>
-      <label class="form-control result-item">{{
-        clienteConsultado.dataDeNascimento
-      }}</label>
-    </div>
-    <div>
-      <label class="title-item">Nome da mãe</label>
-      <input
-        formControlName="nomeDaMae"
-        class="form-control result-item"
-        placeholder="Digite o nome da sua mãe"
-      />
-      <small
-        *ngIf="
-          !formulario.get('nomeDaMae')?.valid &&
-          formulario.get('nomeDaMae')?.touched
-        "
-        class="form-text text-danger"
-        >Por favor, digite corretamente o nome da sua mãe.</small
-      >
-      <small
-        *ngIf="
-          formulario.get('nomeDaMae')?.valid &&
-          formulario.get('nomeDaMae')?.touched
-        "
-        class="form-text text-success"
-        >Ok.</small
-      >
-    </div>
-  </div>
-  <div class="primary">
-    <div class="email result-item-black">
-      <label class="title-item">Email</label>
-      <input
-        formControlName="email"
-        class="form-control result-item"
-        placeholder="Digite o seu email"
-      />
-      <small
-        *ngIf="
-          formulario.get('email')?.valid && formulario.get('email')?.touched
-        "
-        class="form-text text-success"
-        >Ok.</small
-      >
-      <small
-        *ngIf="
-          !formulario.get('email')?.valid && formulario.get('email')?.touched
-        "
-        class="form-text text-danger"
-        >Por favor, digite corretamente o seu email.</small
-      >
-    </div>
-  </div>
-  <div class="subtitle" formGroupName="endereco">
-    Endereço
-    <div class="primary">
-      <div class="email result-item-black">
-        <label class="title-item">CEP</label>
+  <mat-card class="mat-card-borda">
+    <label>Dados pessoais</label>
+    <div class="separator">
+      <mat-form-field appearance="outline">
+        <mat-label>Id</mat-label>
+        <input matInput placeholder="Entre com o seu usuário" required />
+        <mat-error *ngIf="" class="form-text text-danger"
+          >Por favor, digite o seu usuário corretamente!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Nome completo</mat-label>
         <input
-          formControlName="cep"
-          class="form-control result-item"
-          placeholder="Digite o seu CEP"
+          matInput
+          placeholder="Digite o seu nome completo"
+          formControlName="nomeCompleto"
+          required
         />
-        <small
+        <mat-error
+          *ngIf="
+            !formulario.get('nomeCompleto')?.valid &&
+            formulario.get('nomeCompleto')?.touched
+          "
+          class="form-text text-danger"
+          >Por favor, digite o seu nome completo!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input
+          matInput
+          placeholder="Digite o seu CPF"
+          formControlName="cpf"
+          required
+        />
+        <mat-error
+          *ngIf="
+            !formulario.get('cpf')?.valid && formulario.get('cpf')?.touched
+          "
+          class="form-text text-danger"
+          >Por favor, digite corretamente o seu CPF!</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="separator">
+      <mat-form-field appearance="outline">
+        <mat-label>Data de nascimento</mat-label>
+        <input matInput placeholder="Entre com o seu usuário" required />
+        <mat-error *ngIf="" class="form-text text-danger"
+          >Por favor, digite o seu usuário corretamente!</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nome da mãe</mat-label>
+        <input
+          matInput
+          placeholder="Digite o nome da sua mãe"
+          formControlName="nomeDaMae"
+          required
+        />
+        <mat-error
+          *ngIf="
+            !formulario.get('nomeDaMae')?.valid &&
+            formulario.get('nomeDaMae')?.touched
+          "
+          class="form-text text-danger"
+          >Por favor, digite corretamente o nome da sua mãe!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Digite o seu email"
+          formControlName="email"
+          required
+        />
+        <mat-error
+          *ngIf="
+            formulario.get('email')?.valid && formulario.get('email')?.touched
+          "
+          class="form-text text-danger"
+          >Por favor, digite corretamente o seu email!</mat-error
+        >
+      </mat-form-field>
+    </div>
+  </mat-card>
+  <!--Endereço-->
+  <mat-card formGroupName="endereco" class="mat-card-borda">
+    <label>Endereço</label>
+    <div class="separator">
+      <mat-form-field appearance="outline">
+        <mat-label>Cep</mat-label>
+        <input
+          matInput
+          placeholder="Digite o seu CEP"
+          formControlName="cep"
+          required
+        />
+        <mat-error
           *ngIf="
             formulario.get('endereco.cep')?.valid &&
             formulario.get('endereco.cep')?.touched
           "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
-          *ngIf="
-            !formulario.get('endereco.cep')?.valid &&
-            formulario.get('endereco.cep')?.touched
-          "
           class="form-text text-danger"
-          >Por favor, digite corretamente o seu CEP.</small
+          >Por favor, digite corretamente o seu CEP!</mat-error
         >
-      </div>
-    </div>
-    <div class="primary result-item-black">
-      <div>
-        <label class="title-item">Logradouro</label>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Logradouro</mat-label>
         <input
-          formControlName="logradouro"
-          class="form-control result-item"
+          matInput
           placeholder="Digite o seu Logradouro"
+          formControlName="logradouro"
+          required
         />
-        <small
+        <mat-error
           *ngIf="
             formulario.get('endereco.logradouro')?.valid &&
             formulario.get('endereco.logradouro')?.touched
           "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
-          *ngIf="
-            !formulario.get('endereco.logradouro')?.valid &&
-            formulario.get('endereco.logradouro')?.touched
-          "
           class="form-text text-danger"
-          >Por favor, digite corretamente o seu logradouro.</small
+          >Por favor, digite corretamente o seu logradouro!</mat-error
         >
-      </div>
-      <div>
-        <label class="title-item">Número</label>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Número</mat-label>
         <input
+          matInput
+          placeholder="Digite o seu número"
           formControlName="numero"
-          class="form-control result-item"
-          placeholder="Digite o seu Número"
+          required
         />
-        <small
-          *ngIf="
-            formulario.get('endereco.numero')?.valid &&
-            formulario.get('endereco.numero')?.touched
-          "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
+        <mat-error
           *ngIf="
             !formulario.get('endereco.numero')?.valid &&
             formulario.get('endereco.numero')?.touched
           "
           class="form-text text-danger"
-          >Por favor, digite corretamente o seu número.</small
+          >Por favor, digite o seu seu número!</mat-error
         >
-      </div>
-      <div>
-        <label class="title-item">Complemento</label>
+      </mat-form-field>
+    </div>
+    <div class="separator">
+      <mat-form-field appearance="outline">
+        <mat-label>Complemento</mat-label>
         <input
-          formControlName="complemento"
-          class="form-control result-item"
+          matInput
           placeholder="Digite o seu Complemento"
+          formControlName="complemento"
         />
-        <small
-          *ngIf="
-            formulario.get('endereco.complemento')?.valid &&
-            formulario.get('endereco.complemento')?.touched
-          "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
+        <mat-error
           *ngIf="
             !formulario.get('endereco.complemento')?.valid &&
             formulario.get('endereco.complemento')?.touched
           "
-          class="form-text text-danger"
-          >Por favor, digite corretamente o seu complemento.</small
+          >Por favor, digite corretamente o seu complemento!</mat-error
         >
-      </div>
-    </div>
-    <div class="primary result-item-black">
-      <div>
-        <label class="title-item">Bairro</label>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Bairro</mat-label>
         <input
-          formControlName="bairro"
-          class="form-control result-item"
+          matInput
           placeholder="Digite o nome do seu Bairro"
+          formControlName="bairro"
+          required
         />
-        <small
-          *ngIf="
-            formulario.get('endereco.bairro')?.valid &&
-            formulario.get('endereco.bairro')?.touched
-          "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
+        <mat-error
           *ngIf="
             !formulario.get('endereco.bairro')?.valid &&
             formulario.get('endereco.bairro')?.touched
           "
           class="form-text text-danger"
-          >Por favor, digite corretamente o seu bairro.</small
+          >Por favor, digite corretamente o seu bairro!</mat-error
         >
-      </div>
-      <div>
-        <label class="title-item">Cidade</label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
         <input
-          formControlName="cidade"
-          class="form-control result-item"
+          matInput
           placeholder="Digite o nome da sua Cidade"
+          formControlName="cidade"
+          required
         />
-        <small
-          *ngIf="
-            formulario.get('endereco.cidade')?.valid &&
-            formulario.get('endereco.cidade')?.touched
-          "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
+        <mat-error
           *ngIf="
             !formulario.get('endereco.cidade')?.valid &&
             formulario.get('endereco.cidade')?.touched
           "
           class="form-text text-danger"
-          >Por favor, digite corretamente a sua cidade.</small
+          >Por favor, digite corretamente o nome da sua cidade!</mat-error
         >
-      </div>
-      <div>
-        <label class="title-item">Estado</label>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
         <input
+          matInput
+          placeholder="Digite o seu estado"
           formControlName="estado"
-          class="form-control result-item"
-          placeholder="Digite o seu Estado"
+          required
         />
-        <small
-          *ngIf="
-            formulario.get('endereco.estado')?.valid &&
-            formulario.get('endereco.estado')?.touched
-          "
-          class="form-text text-success"
-          >Ok.</small
-        >
-        <small
+        <mat-error
           *ngIf="
             !formulario.get('endereco.estado')?.valid &&
             formulario.get('endereco.estado')?.touched
           "
           class="form-text text-danger"
-          >Por favor, digite corretamente o seu estado.</small
+          >Por favor, digite corretamente o seu estado!</mat-error
         >
-      </div>
+      </mat-form-field>
     </div>
-  </div>
-  <div class="botao">
-    <button class="btn btn-primary atualizar" type="submit">
-      Atualizar dados
-    </button>
-  </div>
-</form> -->
+    <div class="botao">
+      <button mat-raised-button color="primary" type="button">Enviar</button>
+    </div>
+  </mat-card>
+</form>

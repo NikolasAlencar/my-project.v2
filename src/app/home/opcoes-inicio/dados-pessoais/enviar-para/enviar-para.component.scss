@@ -9,11 +9,26 @@
   justify-content: space-around;
 }
 
-button{
-  width: 100%;
+@media (min-width: 906px) {
+  button{
+    width: 100%;
+  }
+}
+
+@media (max-width: 452px) {
+  .principal{
+    flex-direction: column;
+  }
 }
 
 mat-card{
-  width: 100%;
   margin: 0.5rem;
+}
+
+.first{
+  margin-right: 1rem;
+}
+
+div{
+  width: 100%;
 }

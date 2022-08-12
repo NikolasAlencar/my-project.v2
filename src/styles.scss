@@ -1,9 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
-  height: 100%;
   overflow-x: hidden;
-  white-space: nowrap;
+  margin: 0;
+  padding: 0;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif}
+body { font-family: Roboto, "Helvetica Neue", sans-serif}
 
+.mat-card-borda{
+  border: 1px solid rgba(255, 255, 255, 0.384);
+  border-radius: 0.3rem;
+}

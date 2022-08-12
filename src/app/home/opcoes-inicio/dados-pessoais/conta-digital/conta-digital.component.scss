@@ -1,29 +1,9 @@
-.primary{
+.separator{
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
 }
 
-.subtitle{
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-.title-item{
-  display: inline-block;
-  font-size: 0.6rem;
-  margin-right: 0.3rem;
-}
-
-.result-item{
-  padding: 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.384);
-  border-radius: 0.3rem;
-}
-
-.result-item:hover{
-  border: 2px solid rgb(255, 255, 255);
-  transition: 0.2s;
+mat-card{
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
 }
 
