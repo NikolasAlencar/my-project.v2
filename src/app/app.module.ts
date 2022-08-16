@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HeaderModule } from "./header/header.module";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { NgxMaskModule } from "ngx-mask";
 
 @NgModule({
   declarations: [AppComponent, TesteComponent],
@@ -25,7 +26,10 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     BrowserAnimationsModule,
     FlexLayoutModule,
     HeaderModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

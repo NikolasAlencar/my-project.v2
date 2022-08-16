@@ -25,7 +25,5 @@ export class AppComponent implements OnInit {
     this.opened = this.opened === $event ? !$event : $event
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

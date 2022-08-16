@@ -6,6 +6,8 @@ import { ConsultaComponent } from './consulta.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button'
 import { MatRadioModule } from '@angular/material/radio'
+import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { MatRadioModule } from '@angular/material/radio'
     ConsultaRoutingModule,
     SharedModule,
     MatButtonModule,
-    MatRadioModule
+    MatRadioModule,
+    HttpClientModule,
+    NgxMaskModule.forChild()
   ]
 })
 export class ConsultaModule { }
