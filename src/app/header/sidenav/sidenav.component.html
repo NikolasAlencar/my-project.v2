@@ -1,0 +1,6 @@
+<mat-nav-list>
+  <mat-list-item class="option" *ngFor="let option of optionsSidenav" (click)="sair(option.name)">
+    <img [src]="option.src">
+      <span>{{ option.desc }}</span>
+  </mat-list-item>
+</mat-nav-list>

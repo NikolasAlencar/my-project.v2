@@ -9,19 +9,17 @@ import { ajustaGrid } from "src/assets/util/ajustaGrid";
   styleUrls: ["./dados.component.scss"]
 })
 export class DadosComponent implements OnInit {
-  
-  public innerWidth = ajustaGrid()
+  public innerWidth = ajustaGrid();
 
   @HostListener("window:resize")
   onResize() {
-    this.innerWidth = ajustaGrid()
+    this.innerWidth = ajustaGrid();
   }
 
   constructor(
     // private telaInicioService: TelaInicioService,
-    private fb: FormBuilder
-  ) // private consultarService: ConsultarService,
-  // private subscriberService: SubscriberService
+    private fb: FormBuilder // private consultarService: ConsultarService,
+  ) // private subscriberService: SubscriberService
   {
     //this.subscriberService.updateDataHome.subscribe(data => {
     //  this.atualizaDados(data);
@@ -50,6 +48,25 @@ export class DadosComponent implements OnInit {
       estado: "RS"
     }
   };
+
+  optionsDados: any = [
+    { name: "id", desc: "Id", erro: "" },
+    { name: "nomeCompleto", desc: "Nome completo", erro: "" },
+    { name: "cpf", desc: "CPF", erro: "" },
+    { name: "dataDeNascimento", desc: "Data de nascimento", erro: "" },
+    { name: "nomeDaMae", desc: "Nome da mãe", erro: "" },
+    { name: "email", desc: "Email", erro: "" }
+  ];
+
+  optionsEndereco: any = [
+    { name: "cep", desc: "Cep", erro: "endereco.cep" },
+    { name: "logradouro", desc: "Logradouro", erro: "endereco.logradouro" },
+    { name: "numero", desc: "Número", erro: "endereco.numero" },
+    { name: "cidade", desc: "Cidade", erro: "endereco.cidade" },
+    { name: "bairro", desc: "Bairro", erro: "endereco.bairro" },
+    { name: "estado", desc: "Estado", erro: "endereco.estado" },
+    { name: "complemento", desc: "Complemento", erro: "endereco.complemento" }
+  ];
   //= this.consultarService.clienteConsultado[0];
 
   public formulario = this.fb.group({
@@ -58,6 +75,8 @@ export class DadosComponent implements OnInit {
       [Validators.required, Validators.minLength(20), Validators.maxLength(70)]
     ],
     cpf: [this.clienteConsultado.cpf, [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
+    id: [this.clienteConsultado.cpf],
+    dataDeNascimento: [this.clienteConsultado.cpf],
     email: [this.clienteConsultado.email, [Validators.required, Validators.minLength(20), Validators.maxLength(50)]],
     nomeDaMae: [this.clienteConsultado.nomeDaMae, [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
     endereco: this.fb.group({
@@ -80,16 +99,15 @@ export class DadosComponent implements OnInit {
     })
   });
 
-  isFalse: boolean = false;
-
   public confirmar(): void {
-    if (this.formulario.valid === false) {
-      this.formulario.markAllAsTouched();
-    } else {
-      this.formulario.markAsUntouched();
-      this.clienteConsultado = Object.assign(this.clienteConsultado, this.formulario.value);
-      //this.telaInicioService.updateClient(this.clienteConsultado);
-    }
+    console.log(this.formulario.value)
+    // if (this.formulario.valid === false) {
+    //   this.formulario.markAllAsTouched();
+    // } else {
+    //   this.formulario.markAsUntouched();
+    //   this.clienteConsultado = Object.assign(this.clienteConsultado, this.formulario.value);
+    //   //this.telaInicioService.updateClient(this.clienteConsultado);
+    // }
   }
 
   public atualizaDados(dados: any) {

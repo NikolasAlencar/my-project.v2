@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 
 import { OpcoesInicioRoutingModule } from "./opcoes-inicio-routing.module";
 import { OpcoesInicioComponent } from "./opcoes-inicio.component";
-import { ResumoCadastralComponent } from "./resumo-cadastral/resumo-cadastral.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
@@ -12,7 +11,7 @@ import { DadosPessoaisModule } from "./dados-pessoais/dados-pessoais.module";
 import { CrivoModule } from "./crivo/crivo.module";
 
 @NgModule({
-  declarations: [OpcoesInicioComponent, ResumoCadastralComponent],
+  declarations: [OpcoesInicioComponent],
   imports: [
     CommonModule,
     OpcoesInicioRoutingModule,

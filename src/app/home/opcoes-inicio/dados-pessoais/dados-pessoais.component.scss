@@ -9,22 +9,13 @@
 }
 
 .principal{
-  background-color: #424242;
   padding-top: 0.5rem;
 }
 
-app-enviar-para{
+app-reset-senha, app-enviar-para, app-historico{
   width: 100%;
 }
 
-app-reset-senha{
-  width: 100%;
-}
-
-app-historico{
-  width: 100%;
-  height: 100%;
-}
 
 mat-card{
   margin: 0.5rem;

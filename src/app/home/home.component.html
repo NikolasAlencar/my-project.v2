@@ -1,4 +1,9 @@
 <div class="principal">
   <!--[ngClass]="opcoesHeaderAbertas ? 'header-aberto' : 'header-fechado'"-->
+  <app-resumo-cadastral></app-resumo-cadastral>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a mat-tab-link *ngFor="let option of opcoes" [routerLink]="option.path">{{ option.nome }}</a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
   <router-outlet></router-outlet>
 </div>

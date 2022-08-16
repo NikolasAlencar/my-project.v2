@@ -10,11 +10,11 @@ export class ResumoCadastralComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
 
-  @ViewChild('verLegenda', { static: true })
-  verLegenda!: TemplateRef<any>
+  @ViewChild('legenda', { static: true })
+  legenda!: TemplateRef<any>
 
-  abrirVerLegenda() {
-    this.dialog.open(this.verLegenda)
+  verLegenda() {
+    this.dialog.open(this.legenda)
   }
 
   ngOnInit(): void {

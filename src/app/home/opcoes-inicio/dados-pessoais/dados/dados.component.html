@@ -4,99 +4,27 @@
     <mat-grid-list [cols]="innerWidth" rowHeight="3:1">
       <label>Dados pessoais</label>
       <div class="separator">
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Id</mat-label>
-            <input matInput placeholder="Entre com o seu usuário" required />
-            <mat-error *ngIf="" class="form-text text-danger"
-              >Por favor, digite o seu usuário corretamente!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Nome completo</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu nome completo"
-              formControlName="nomeCompleto"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('nomeCompleto')?.valid &&
-                formulario.get('nomeCompleto')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite o seu nome completo!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>CPF</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu CPF"
-              formControlName="cpf"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('cpf')?.valid && formulario.get('cpf')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o seu CPF!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Data de nascimento</mat-label>
-            <input matInput placeholder="Entre com o seu usuário" required />
-            <mat-error *ngIf="" class="form-text text-danger"
-              >Por favor, digite o seu usuário corretamente!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Nome da mãe</mat-label>
-            <input
-              matInput
-              placeholder="Digite o nome da sua mãe"
-              formControlName="nomeDaMae"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('nomeDaMae')?.valid &&
-                formulario.get('nomeDaMae')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o nome da sua mãe!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu email"
-              formControlName="email"
-              required
-            />
-            <mat-error
-              *ngIf="
-                formulario.get('email')?.valid &&
-                formulario.get('email')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o seu email!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+        <div *ngFor="let option of optionsDados">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ option.desc }}</mat-label>
+              <input
+                matInput
+                placeholder="Digite o seu nome completo"
+                formControlName={{option.name}}
+                required
+              />
+              <mat-error
+                *ngIf="
+                  !formulario.get(option.name)?.valid &&
+                  formulario.get(option.name)?.touched
+                "
+                class="form-text text-danger"
+                >{{ option.desc }} inválido!</mat-error
+              >
+            </mat-form-field>
+          </mat-grid-tile>
+        </div>
       </div>
     </mat-grid-list>
   </mat-card>
@@ -105,141 +33,31 @@
     <mat-grid-list [cols]="innerWidth" rowHeight="3:1">
       <label>Endereço</label>
       <div class="separator">
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Cep</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu CEP"
-              formControlName="cep"
-              required
-            />
-            <mat-error
-              *ngIf="
-                formulario.get('endereco.cep')?.valid &&
-                formulario.get('endereco.cep')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o seu CEP!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Logradouro</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu Logradouro"
-              formControlName="logradouro"
-              required
-            />
-            <mat-error
-              *ngIf="
-                formulario.get('endereco.logradouro')?.valid &&
-                formulario.get('endereco.logradouro')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o seu logradouro!</mat-error
-            >
-          </mat-form-field></mat-grid-tile
-        >
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Número</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu número"
-              formControlName="numero"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('endereco.numero')?.valid &&
-                formulario.get('endereco.numero')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite o seu seu número!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Complemento</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu Complemento"
-              formControlName="complemento"
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('endereco.complemento')?.valid &&
-                formulario.get('endereco.complemento')?.touched
-              "
-              >Por favor, digite corretamente o seu complemento!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Bairro</mat-label>
-            <input
-              matInput
-              placeholder="Digite o nome do seu Bairro"
-              formControlName="bairro"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('endereco.bairro')?.valid &&
-                formulario.get('endereco.bairro')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o seu bairro!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Cidade</mat-label>
-            <input
-              matInput
-              placeholder="Digite o nome da sua Cidade"
-              formControlName="cidade"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('endereco.cidade')?.valid &&
-                formulario.get('endereco.cidade')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o nome da sua cidade!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>Estado</mat-label>
-            <input
-              matInput
-              placeholder="Digite o seu estado"
-              formControlName="estado"
-              required
-            />
-            <mat-error
-              *ngIf="
-                !formulario.get('endereco.estado')?.valid &&
-                formulario.get('endereco.estado')?.touched
-              "
-              class="form-text text-danger"
-              >Por favor, digite corretamente o seu estado!</mat-error
-            >
-          </mat-form-field>
-        </mat-grid-tile>
+        <div *ngFor="let option of optionsEndereco">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ option.desc }}</mat-label>
+              <input
+                matInput
+                placeholder="Digite o seu nome completo"
+                formControlName={{option.name}}
+                required
+              />
+              <mat-error
+                *ngIf="
+                  !formulario.get(option.erro)?.valid &&
+                  formulario.get(option.erro)?.touched
+                "
+                class="form-text text-danger"
+                >{{ option.desc }} inválido!</mat-error
+              >
+            </mat-form-field>
+          </mat-grid-tile>
+        </div>
       </div>
     </mat-grid-list>
     <div class="botao">
-      <button mat-raised-button color="primary" type="button">Enviar</button>
+      <button mat-raised-button color="primary" type="submit">Atualizar dados</button>
     </div>
   </mat-card>
 </form>

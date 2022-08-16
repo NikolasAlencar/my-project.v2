@@ -2,27 +2,14 @@
   <mat-grid-list [cols]="innerWidth" rowHeight="3:1">
     <label>Conta digital</label>
     <div class="separator">
-      <mat-grid-tile>
-        <mat-form-field appearance="outline">
-          <mat-label>Cadastro iniciado em </mat-label>
-          <input matInput />
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field appearance="outline">
-          <mat-label>Agência</mat-label>
-          <input matInput /> </mat-form-field
-      ></mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field appearance="outline">
-          <mat-label>Conta corrente</mat-label>
-          <input matInput /> </mat-form-field
-      ></mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field appearance="outline">
-          <mat-label>Cadastro criado em</mat-label>
-          <input matInput /> </mat-form-field
-      ></mat-grid-tile>
+      <div *ngFor="let option of optionsContaDigital">
+        <mat-grid-tile>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ option.desc }}</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
     </div>
   </mat-grid-list>
 </mat-card>

@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from "@angular/core";
-import { Cols } from "src/assets/model/Cols";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
 
 @Component({
@@ -8,12 +7,11 @@ import { ajustaGrid } from "src/assets/util/ajustaGrid";
   styleUrls: ["./conta-digital.component.scss"]
 })
 export class ContaDigitalComponent implements OnInit {
-
-  public innerWidth = ajustaGrid()
+  public innerWidth = ajustaGrid();
 
   @HostListener("window:resize")
   onResize() {
-    this.innerWidth = ajustaGrid()
+    this.innerWidth = ajustaGrid();
   }
 
   constructor() // public telaInicioService: TelaInicioService,private observableMedia: MediaObserver,
@@ -48,8 +46,14 @@ export class ContaDigitalComponent implements OnInit {
     }
   };
 
+  optionsContaDigital: any = [
+    { desc: "Cadastro iniciado em" },
+    { desc: "Agência" },
+    { desc: "Conta corrente" },
+    { desc: "Cadastro criado em" }
+  ];
+
   ngOnInit(): void {
-    console.log(window.screen.width);
     //this.clienteConsultado = this.consultarService.clienteConsultado[0];
     // const grid = new Map([
     //   ["xs", 1],
