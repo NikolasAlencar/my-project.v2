@@ -51,3 +51,16 @@ app-root{
   background-color: #FFD54F;
   display: flex;
 }
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(143, 143, 143, 0.274);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 148, 148, 0.74);
+  border-radius: 10px;
+}
