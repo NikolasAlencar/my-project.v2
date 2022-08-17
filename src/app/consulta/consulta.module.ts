@@ -6,7 +6,6 @@ import { ConsultaComponent } from './consulta.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button'
 import { MatRadioModule } from '@angular/material/radio'
-import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 
 
@@ -20,7 +19,6 @@ import { NgxMaskModule } from 'ngx-mask';
     SharedModule,
     MatButtonModule,
     MatRadioModule,
-    HttpClientModule,
     NgxMaskModule.forChild()
   ]
 })

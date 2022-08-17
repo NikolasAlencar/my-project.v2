@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { formalizaValor } from "src/assets/util/formalizaValor";
 import { retiraEspeciais } from "src/assets/util/retiraEspeciais";
-import { ConsultarService } from "../services/consultar/consultar.service";
+import { ConsultarService } from "./services/consultar.service";
 import { Acao, Acoes } from "./model/acoes";
 
 @Component({
@@ -12,7 +14,8 @@ import { Acao, Acoes } from "./model/acoes";
 export class ConsultaComponent implements OnInit {
   constructor(
     private fb: FormBuilder, //private telaInicioService: TelaInicioService, private loginService: LoginService,
-    //private consultarService: ConsultarService
+    private consultarService: ConsultarService,
+    private router: Router
   ) {}
 
   public consultar = this.fb.group({
@@ -31,35 +34,27 @@ export class ConsultaComponent implements OnInit {
   ];
 
   public loading: boolean = false;
-  opcaoSelecionada: number = 0;
-
-  //private urlAtual = this.route.snapshot.url.join('');
+  public opcaoSelecionada: number = 0;
+  private cliente$: any;
 
   public pesquisar(opcaoSelecionada: string) {
+    this.loading = true;
     if(this.consultar.controls[opcaoSelecionada].valid){
       this.consultar.markAsUntouched();
-      
+      this.consultarService.consultar(formalizaValor(opcaoSelecionada), this.consultar.get(opcaoSelecionada)?.value)
+        .subscribe(c => {
+          this.cliente$ = c[0]
+          setTimeout(() => {
+            this.loading = false;
+            console.log(this.cliente$)
+            this.router.navigate(["/home"], this.cliente$);
+          }, 3000);
+      })
     }else{
-      this.consultar.markAllAsTouched();
-    }
-    console.log(this.opcaoSelecionada)
-    // const opcaoSelecionada = retiraEspeciais(
-    //   this.opcaoSelecionada.nome.toLocaleLowerCase().substring(this.opcaoSelecionada.nome.indexOf("/"))
-    // );
-    console.log();
-    //console.log(opcaoSelecionada)
-    //this.consultarService(opcaoSelecionada, this.)
-    //if (this.consultar.valid === false) {
-    //this.consultar.markAllAsTouched();
-    //} else {
-    // this.consultar.markAsUntouched();
-    // this.loading = true;
-    //this.telaInicioService.consultar(this.opcaoSelecionada, this.valorDigitado)
-    // setTimeout(() => {
-    //   this.loading = false;
-    //   this.router.navigate(["/home"]);
-    // }, 3000);
-    //}
+       this.consultar.markAllAsTouched();
+       this.loading = false;
+     }
+
   }
   ngOnInit(): void {
     this.consultar.get('radio')?.valueChanges.subscribe(() => this.opcaoSelecionada = this.consultar.get('radio')?.value-1)

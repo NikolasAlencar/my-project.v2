@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, HostListener, Input, OnInit } from "@angular/core";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
+import { camelize } from "src/assets/util/camelize";
 
 @Component({
   selector: "app-conta-digital",
@@ -23,53 +24,16 @@ export class ContaDigitalComponent implements OnInit {
     // });
   }
 
-  public clienteConsultado: any = {
-    id: 1,
-    nome: "Nikolas",
-    sobrenome: "Teste Testee",
-    cpf: "764.494.450-84",
-    agencia: "0284",
-    conta: "032881-1",
-    dataDeNascimento: "02/02/2001",
-    celular: "11930497995",
-    nomeDaMae: "Silvia Thompson da Silva",
-    area: "SM",
-    email: "nikolasalencarrs73@gmail.com",
-    endereco: {
-      cep: "04.910-331",
-      logradouro: "AC Marcelino Barski",
-      numero: "226",
-      cidade: "Porto Alegre",
-      bairro: "JD Sabara",
-      complemento: "",
-      estado: "RS"
-    }
-  };
+  camelize: any = camelize
+
+  @Input() clienteConsultado: any
 
   optionsContaDigital: any = [
     { desc: "Cadastro iniciado em" },
     { desc: "Agência" },
-    { desc: "Conta corrente" },
+    { desc: "Conta" },
     { desc: "Cadastro criado em" }
   ];
 
-  ngOnInit(): void {
-    //this.clienteConsultado = this.consultarService.clienteConsultado[0];
-    // const grid = new Map([
-    //   ["xs", 1],
-    //   ["sm", 2],
-    //   ["md", 3],
-    //   ["lg", 4],
-    //   ["xl", 5]
-    // ]);
-    // let start: any;
-    // grid.forEach((cols, mqAlias) => {
-    //   if (this.observableMedia.isActive(mqAlias)) {
-    //     start = cols;
-    //   }
-    // });
-    // this.cols = this.observableMedia.asObservable()
-    //   map((change: { mqAlias: string; }) => grid.get(change.mqAlias))
-    //   startWith(start);
-  }
+  ngOnInit(): void {}
 }
