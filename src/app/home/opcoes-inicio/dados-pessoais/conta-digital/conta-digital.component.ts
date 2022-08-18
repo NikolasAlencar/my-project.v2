@@ -3,6 +3,7 @@ import { FormBuilder } from "@angular/forms";
 import { Subject } from "rxjs";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
 import { DadosPessoaisService } from "../services/dados-pessoais.service";
+import { OptionsContaDigital } from "./model/OptionContaDigital";
 
 @Component({
   selector: "app-conta-digital",
@@ -22,7 +23,7 @@ export class ContaDigitalComponent implements OnInit {
   @Input() clienteConsultado!: Subject<any>;
   cliente: any;
 
-  optionsContaDigital: any = [
+  optionsContaDigital: OptionsContaDigital = [
     { name: 'cadastroIniciadoEm', desc: "Cadastro iniciado em" },
     { name: 'agencia', desc: "Agencia" },
     { name: 'conta', desc: "Conta" },

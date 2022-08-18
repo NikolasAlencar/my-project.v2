@@ -4,6 +4,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConsultaComponent } from "src/app/consulta/consulta.component";
 import { ConsultarService } from "src/app/consulta/services/consultar.service";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
+import { OptionsDados } from "./model/OptionDado";
+import { OptionsEndereco } from "./model/OptionEndereco";
 
 @Component({
   selector: "app-dados",
@@ -11,6 +13,17 @@ import { ajustaGrid } from "src/assets/util/ajustaGrid";
   styleUrls: ["./dados.component.scss"]
 })
 export class DadosComponent implements OnInit{
+
+  constructor(
+    private fb: FormBuilder,
+    private consultarService: ConsultarService,
+    private dialog: MatDialog
+    ) {
+    //this.subscriberService.updateDataHome.subscribe(data => {
+    //  this.atualizaDados(data);
+    //});
+  }
+  
   public innerWidth = ajustaGrid();
 
   @HostListener("window:resize")
@@ -21,27 +34,19 @@ export class DadosComponent implements OnInit{
   @ViewChild('consulta', { static: true })
   consulta!: TemplateRef<ConsultaComponent>
 
-  abrirConsulta() {
+  abrirConsulta(param?: string) {
+    this.erro = param === 'again' ? '' : "Você ainda não consultou nenhum cliente! Gostaria de consultar agora?"
     this.dialog.open(this.consulta)
   }
 
-  constructor(
-    // private telaInicioService: TelaInicioService,
-    private fb: FormBuilder, // private consultarService: ConsultarService, // private subscriberService: SubscriberService
-    private consultarService: ConsultarService,
-    private dialog: MatDialog
-    ) {
-    //this.subscriberService.updateDataHome.subscribe(data => {
-    //  this.atualizaDados(data);
-    //});
-  }
+  erro!: string
 
   @Input() clienteConsultado: any;
   @Output() emiteDados = new EventEmitter<any>();
 
   startDate = new Date(2022, 0, 1);
 
-  optionsDados: Array<any> = [
+  optionsDados: OptionsDados = [
     { name: "id", desc: "Id", erro: "" },
     { name: "nomeCompleto", desc: "Nome completo", erro: "" },
     { name: "cpf", desc: "CPF", erro: "" },
@@ -50,7 +55,7 @@ export class DadosComponent implements OnInit{
     { name: "email", desc: "Email", erro: "" }
   ];
 
-  optionsEndereco: Array<any> = [
+  optionsEndereco: OptionsEndereco = [
     { name: "cep", desc: "Cep", erro: "endereco.cep" },
     { name: "logradouro", desc: "Logradouro", erro: "endereco.logradouro" },
     { name: "numero", desc: "Número", erro: "endereco.numero" },
@@ -73,7 +78,7 @@ export class DadosComponent implements OnInit{
       numero: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(7)]],
       cidade: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
       bairro: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
-      complemento: ["", [Validators.maxLength(30)]],
+      complemento: [""],
       estado: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(2)]]
     })
   });
@@ -87,14 +92,6 @@ export class DadosComponent implements OnInit{
     //   this.clienteConsultado = Object.assign(this.clienteConsultado, this.formulario.value);
     //   //this.telaInicioService.updateClient(this.clienteConsultado);
     // }
-  }
-
-  public atualizaDados(dados: any) {
-    // this.clienteConsultado = dados;
-    // const nomeCompleto = juntaNome(this.clienteConsultado.nome, this.clienteConsultado.sobrenome);
-    // Object.assign(this.clienteConsultado, { nomeCompleto });
-    // this.formulario.patchValue(this.clienteConsultado);
-    // this.formulario.updateValueAndValidity();
   }
 
   public recebeDados($event: any){

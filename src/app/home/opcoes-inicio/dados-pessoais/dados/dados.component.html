@@ -39,7 +39,6 @@
               <input
                 matInput
                 formControlName="{{ option.name }}"
-                required
               />
               <mat-error
                 *ngIf="
@@ -55,6 +54,9 @@
       </div>
     </mat-grid-list>
     <div class="botao">
+      <button mat-raised-button color="primary" class="consultar" type="button" (click)="abrirConsulta('again')">
+        Consultar novamente
+      </button>
       <button mat-raised-button color="primary" type="submit">
         Atualizar dados
       </button>
@@ -73,8 +75,7 @@
 
 <ng-template #consulta class="consulta">
   <mat-error class="erro-personalizado">
-    <p>Você ainda não consultou nenhum cliente!</p>
-    <p>Gostaria de consultar agora?</p>
+    {{ erro }}
   </mat-error>
   <app-consulta [reuse]="true" (emiteDados)="recebeDados($event)"></app-consulta>
 </ng-template>
