@@ -1,6 +1,8 @@
-import { Component, HostListener, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, TemplateRef, ViewChild } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Cols } from "src/assets/model/Cols";
+import { MatDialog } from "@angular/material/dialog";
+import { ConsultaComponent } from "src/app/consulta/consulta.component";
+import { ConsultarService } from "src/app/consulta/services/consultar.service";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
 
 @Component({
@@ -16,16 +18,28 @@ export class DadosComponent implements OnInit{
     this.innerWidth = ajustaGrid();
   }
 
+  @ViewChild('consulta', { static: true })
+  consulta!: TemplateRef<ConsultaComponent>
+
+  abrirConsulta() {
+    this.dialog.open(this.consulta)
+  }
+
   constructor(
     // private telaInicioService: TelaInicioService,
-    private fb: FormBuilder // private consultarService: ConsultarService, // private subscriberService: SubscriberService
-  ) {
+    private fb: FormBuilder, // private consultarService: ConsultarService, // private subscriberService: SubscriberService
+    private consultarService: ConsultarService,
+    private dialog: MatDialog
+    ) {
     //this.subscriberService.updateDataHome.subscribe(data => {
     //  this.atualizaDados(data);
     //});
   }
 
   @Input() clienteConsultado: any;
+  @Output() emiteDados = new EventEmitter<any>();
+
+  startDate = new Date(2022, 0, 1);
 
   optionsDados: Array<any> = [
     { name: "id", desc: "Id", erro: "" },
@@ -46,41 +60,11 @@ export class DadosComponent implements OnInit{
     { name: "complemento", desc: "Complemento", erro: "endereco.complemento" }
   ];
 
-  // public formulario = this.fb.group({
-  //   nomeCompleto: [
-  //     this.clienteConsultado.nome + " " + this.clienteConsultado.sobrenome,
-  //     [Validators.required, Validators.minLength(20), Validators.maxLength(70)]
-  //   ],
-  //   cpf: [this.clienteConsultado.cpf, [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
-  //   id: [this.clienteConsultado.cpf],
-  //   dataDeNascimento: [this.clienteConsultado.cpf],
-  //   email: [this.clienteConsultado.email, [Validators.required, Validators.minLength(20), Validators.maxLength(50)]],
-  //   nomeDaMae: [this.clienteConsultado.nomeDaMae, [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
-  //   endereco: this.fb.group({
-  //     cep: [this.clienteConsultado.endereco.cep, [Validators.required, Validators.minLength(7), Validators.maxLength(15)]],
-  //     logradouro: [
-  //       this.clienteConsultado.endereco.logradouro,
-  //       [Validators.required, Validators.minLength(2), Validators.maxLength(20)]
-  //     ],
-  //     numero: [this.clienteConsultado.endereco.numero, [Validators.required, Validators.minLength(1), Validators.maxLength(7)]],
-  //     cidade: [
-  //       this.clienteConsultado.endereco.cidade,
-  //       [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
-  //     ],
-  //     bairro: [
-  //       this.clienteConsultado.endereco.bairro,
-  //       [Validators.required, Validators.minLength(5), Validators.maxLength(30)]
-  //     ],
-  //     complemento: [this.clienteConsultado.endereco.complemento, [Validators.maxLength(30)]],
-  //     estado: [this.clienteConsultado.endereco.estado, [Validators.required, Validators.minLength(2), Validators.maxLength(2)]]
-  //   })
-  // });
-
   public formulario = this.fb.group({
     nomeCompleto: ["", [Validators.required, Validators.minLength(20), Validators.maxLength(70)]],
     cpf: ["", [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
     id: [""],
-    dataDeNascimento: [""],
+    dataDeNascimento: ["aaa"],
     email: ["", [Validators.required, Validators.minLength(20), Validators.maxLength(50)]],
     nomeDaMae: ["", [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
     endereco: this.fb.group({
@@ -95,7 +79,7 @@ export class DadosComponent implements OnInit{
   });
 
   public confirmar(): void {
-    //console.log(this.formulario.value)
+    console.log(this.formulario.value)
     // if (this.formulario.valid === false) {
     //   this.formulario.markAllAsTouched();
     // } else {
@@ -113,21 +97,35 @@ export class DadosComponent implements OnInit{
     // this.formulario.updateValueAndValidity();
   }
 
-  ngOnInit(): void {
+  public recebeDados($event: any){
+    this.clienteConsultado = $event
+    this.emiteDados.emit($event)
+    this.dialog.closeAll()
     this.populaDados()
   }
 
   populaDados(){
-    this.optionsDados.map(option => {
-      if(option.name === 'nomeCompleto'){
-        this.formulario.get('nomeCompleto')?.patchValue(this.clienteConsultado.nome + " " + this.clienteConsultado.sobrenome)
+    const dadosGerais = this.optionsDados.concat(this.optionsEndereco)
+    dadosGerais.map(option => {
+      if(option.erro.includes('.')){
+        this.formulario.get('endereco')?.get(option.name)?.setValue(this.clienteConsultado.endereco[option.name])
+      }else if(option.name === 'nomeCompleto'){
+        this.formulario.get('nomeCompleto')?.setValue(this.clienteConsultado.nome + " " + this.clienteConsultado.sobrenome)
       }else{
-        this.formulario.get(option.name)?.patchValue(this.clienteConsultado[option.name])
+        this.formulario.get(option.name)?.setValue(this.clienteConsultado[option.name])
       }
     })
-    this.optionsEndereco.map(option => {
-      this.formulario.get('endereco')?.get(option.name)?.patchValue(this.clienteConsultado.endereco[option.name])
-    })
     this.formulario.updateValueAndValidity()
+  }
+
+  ngOnInit(): void {
+    if(this.clienteConsultado['nomeCompleto']) {
+      this.populaDados()
+    }else{
+      this.consultarService.getCliente() ?
+      (this.clienteConsultado = this.consultarService.getCliente(),
+      this.populaDados()) :
+      this.abrirConsulta()
+    }
   }
 }

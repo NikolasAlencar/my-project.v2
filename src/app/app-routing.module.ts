@@ -8,18 +8,24 @@ export const routes: Routes = [
     path: "home",
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule),
     data: {
-      header: true
+      header: {
+        hasHeader: true,
+        name: "Home"
+      }
     }
   },
   {
     path: "login",
-    loadChildren: () => import("./login/login.module").then(m => m.LoginModule),
+    loadChildren: () => import("./login/login.module").then(m => m.LoginModule)
   },
   {
     path: "consulta",
     loadChildren: () => import("./consulta/consulta.module").then(m => m.ConsultaModule),
     data: {
-      header: true
+      header: {
+        hasHeader: true,
+        name: "Consulta"
+      }
     }
   },
   {

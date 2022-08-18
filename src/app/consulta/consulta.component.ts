@@ -1,10 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigationExtras, Router } from "@angular/router";
 import { formalizaValor } from "src/assets/util/formalizaValor";
-import { retiraEspeciais } from "src/assets/util/retiraEspeciais";
 import { ConsultarService } from "./services/consultar.service";
-import { Acao, Acoes } from "./model/acoes";
+import { Acoes } from "./model/acoes";
 
 @Component({
   selector: "app-consulta",
@@ -17,6 +16,9 @@ export class ConsultaComponent implements OnInit {
     private consultarService: ConsultarService,
     private router: Router
   ) {}
+
+  @Input() reuse: boolean = false;
+  @Output() emiteDados = new EventEmitter<any>();
 
   public consultar = this.fb.group({
     radio: ["1", [Validators.required]],
@@ -35,7 +37,6 @@ export class ConsultaComponent implements OnInit {
 
   public loading: boolean = false;
   public opcaoSelecionada: number = 0;
-  private cliente$: any;
 
   public pesquisar(opcaoSelecionada: string) {
     this.loading = true;
@@ -43,12 +44,11 @@ export class ConsultaComponent implements OnInit {
       this.consultar.markAsUntouched();
       this.consultarService.consultar(formalizaValor(opcaoSelecionada), this.consultar.get(opcaoSelecionada)?.value)
         .subscribe(c => {
-          this.cliente$ = c[0]
-          setTimeout(() => {
-            this.loading = false;
-            console.log(this.cliente$)
-            this.router.navigate(["/home"], this.cliente$);
-          }, 3000);
+          this.consultarService.setCliente(c[0])
+          this.loading = false;
+          this.reuse ?
+          this.emiteDados.emit(this.consultarService.getCliente()) :
+          this.router.navigate(["/home"], this.consultarService.getCliente() as NavigationExtras)
       })
     }else{
        this.consultar.markAllAsTouched();

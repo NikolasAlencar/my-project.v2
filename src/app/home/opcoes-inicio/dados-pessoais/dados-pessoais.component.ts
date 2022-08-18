@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { DadosPessoaisService } from './services/dados-pessoais.service';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -8,9 +9,15 @@ import { Router } from '@angular/router';
 })
 export class DadosPessoaisComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public service: DadosPessoaisService) { }
 
   public clienteConsultado = this.router.getCurrentNavigation()?.extras;
+
+  @Output() emiteDados = new EventEmitter<any>()
+
+  recebeDados($event: any){
+    this.service.dados$.next($event) ;
+  }
 
   ngOnInit(): void { }
 

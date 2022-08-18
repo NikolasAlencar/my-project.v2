@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   open: boolean = false;
 
   @Output() openedOrClosed = new EventEmitter<boolean>()
+  @Input() name!: string;
 
   openAndClose(openedOrClosed: boolean){
     this.open = openedOrClosed;

@@ -1,6 +1,8 @@
 import { Component, HostListener, Input, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { Subject } from "rxjs";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
-import { camelize } from "src/assets/util/camelize";
+import { DadosPessoaisService } from "../services/dados-pessoais.service";
 
 @Component({
   selector: "app-conta-digital",
@@ -15,25 +17,37 @@ export class ContaDigitalComponent implements OnInit {
     this.innerWidth = ajustaGrid();
   }
 
-  constructor() // public telaInicioService: TelaInicioService,private observableMedia: MediaObserver,
-  // private consultarService: ConsultarService,
-  // private subscriberService: SubscriberService
-  {
-    // this.subscriberService.updateDataHome.subscribe(data => {
-    //   this.clienteConsultado = data;
-    // });
-  }
+  constructor(private fb: FormBuilder, private service: DadosPessoaisService){}
 
-  camelize: any = camelize
-
-  @Input() clienteConsultado: any
+  @Input() clienteConsultado!: Subject<any>;
+  cliente: any;
 
   optionsContaDigital: any = [
-    { desc: "Cadastro iniciado em" },
-    { desc: "Agência" },
-    { desc: "Conta" },
-    { desc: "Cadastro criado em" }
+    { name: 'cadastroIniciadoEm', desc: "Cadastro iniciado em" },
+    { name: 'agencia', desc: "Agencia" },
+    { name: 'conta', desc: "Conta" },
+    { name: 'cadastroCriadoEm', desc: "Cadastro criado em" }
   ];
 
-  ngOnInit(): void {}
+  public formulario = this.fb.group({
+    cadastroIniciadoEm: [""],
+    agencia: [""],
+    conta: [""],
+    cadastroCriadoEm: [""]
+  });
+
+  ngOnInit(): void {
+    this.service.getDados() ?
+    (this.cliente = this.service.getDados(), this.populaDados()) :
+    this.clienteConsultado.subscribe(c => {
+      this.cliente = c
+      this.populaDados()
+    })
+  }
+
+  public populaDados(){
+    this.optionsContaDigital.map((option: any) => {
+      this.formulario.get(option.name)?.setValue(this.cliente[option.name])
+    })
+  }
 }

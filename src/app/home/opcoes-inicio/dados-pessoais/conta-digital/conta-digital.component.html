@@ -1,15 +1,23 @@
-<mat-card class="mat-card-borda">
-  <mat-grid-list [cols]="innerWidth" rowHeight="3:1">
-    <label>Conta digital</label>
-    <div class="separator">
-      <div *ngFor="let option of optionsContaDigital">
-        <mat-grid-tile>
-          <mat-form-field appearance="outline">
-            <mat-label>{{ option.desc }}</mat-label>
-            <input matInput [readonly]="true" required>
-          </mat-form-field>
-        </mat-grid-tile>
+<form [formGroup]="formulario" novalidate>
+  <mat-card class="mat-card-borda">
+    <mat-grid-list [cols]="innerWidth" rowHeight="3:1">
+      <label>Conta digital</label>
+      <div class="separator">
+        <div *ngFor="let option of optionsContaDigital">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ option.desc }}</mat-label>
+              <input
+                matInput
+                placeholder="Digite o seu nome completo"
+                formControlName="{{ option.name }}"
+                required
+                [readonly]="true"
+              />
+            </mat-form-field>
+          </mat-grid-tile>
+        </div>
       </div>
-    </div>
-  </mat-grid-list>
-</mat-card>
+    </mat-grid-list>
+  </mat-card>
+</form>

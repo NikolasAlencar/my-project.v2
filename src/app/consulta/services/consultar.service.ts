@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Client } from "src/assets/model/Client";
 import { retiraEspeciais } from "src/assets/util/retiraEspeciais";
 
 @Injectable({
@@ -9,7 +10,7 @@ import { retiraEspeciais } from "src/assets/util/retiraEspeciais";
 export class ConsultarService {
   constructor(private http: HttpClient) {}
 
-  public clienteConsultado: any;
+  private clienteConsultado!: Client;
 
   private url_api: string = "http://localhost:3000";
 
@@ -42,5 +43,13 @@ export class ConsultarService {
         return this.obtemClienteByid(valorDigitado);
     }
     return new Observable
+  }
+
+  setCliente(cliente: any){
+    this.clienteConsultado = cliente
+  }
+
+  getCliente(){
+    return this.clienteConsultado
   }
 }

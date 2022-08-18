@@ -1,6 +1,6 @@
 <div class="principal">
-  <app-conta-digital [clienteConsultado]="clienteConsultado"></app-conta-digital>
-  <app-dados [clienteConsultado]="clienteConsultado"></app-dados>
+  <app-conta-digital [clienteConsultado]="service.dados$"></app-conta-digital>
+  <app-dados [clienteConsultado]="clienteConsultado" (emiteDados)="recebeDados($event)"></app-dados>
   <div class="inferior">
     <app-historico></app-historico>
     <div>

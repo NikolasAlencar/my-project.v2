@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-sidenav",
@@ -6,10 +7,10 @@ import { Component, EventEmitter, OnInit, Output } from "@angular/core";
   styleUrls: ["./sidenav.component.scss"]
 })
 export class SidenavComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   optionsSidenav: any = [
-    { name: "consultar-cliente", desc: "Consultar cliente", src: `../../../assets/img/consultar-cliente.png` },
+    { name: "consultar-cliente", desc: "Consultar cliente", src: `../../../assets/img/consultar-cliente.png`, path: 'consulta'},
     { name: "cliente-bloqueado", desc: "Clientes bloqueados", src: `../../../assets/img/cliente-bloqueado.png` },
     { name: "cliente-restricao", desc: "Clientes com restrição", src: `../../../assets/img/cliente-restricao.png` },
     { name: "ligar", desc: "Me liga", src: `../../../assets/img/ligar.png` },
@@ -28,8 +29,8 @@ export class SidenavComponent implements OnInit {
 
   @Output() exit = new EventEmitter<boolean>()
 
-  sair(sair: string){
-    if(sair === "sair") this.exit.emit(false)
+  navegar(option: any){
+    option.name === "sair" ? this.exit.emit(false) : this.router.navigate([option?.path]), this.exit.emit(false)
   }
 
   ngOnInit(): void {}

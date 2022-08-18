@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -26,15 +26,14 @@ export class LoginComponent implements OnInit {
   public loading: boolean = false;
 
   entrar = () => {
+    this.loading = true;
     if (this.login.valid === false) {
       this.login.markAllAsTouched();
+      this.loading = false;
     } else {
       this.login.markAsUntouched();
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-        this.router.navigate(['/consulta'])
-      }, 3000);
+      this.loading = false;
+      this.router.navigate(["/consulta"]);
       //this.telaInicioService.entrar(this.login.value.usuario, this.login.value.senha);
     }
   };
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     //this.subscriberService.verificaHasHeader(false);
     //this.telaInicioService.adicionaHistoria(this.urlAtual);
     //this.loginService.autenticado = false;

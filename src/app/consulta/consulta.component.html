@@ -1,5 +1,5 @@
-<div class="a">
-  <div class="principal">
+<div [ngClass]="reuse ? '' : 'a'">
+  <div [ngClass]="reuse ? '' : 'principal'">
     <div class="title">Consultar cliente</div>
     <form [formGroup]="consultar" novalidate (ngSubmit)="pesquisar(acoes[opcaoSelecionada].nome)">
       <div class="primary">

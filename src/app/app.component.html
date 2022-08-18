@@ -4,8 +4,9 @@
   </mat-sidenav>
   <mat-sidenav-content
     ><app-header
-      *ngIf="hasHeader"
+      *ngIf="header?.hasHeader"
       (openedOrClosed)="openOrClose($event)"
+      [name]="header.name"
     ></app-header>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

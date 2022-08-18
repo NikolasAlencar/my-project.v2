@@ -12,6 +12,9 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { MatTableModule } from "@angular/material/table";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { ConsultaModule } from "src/app/consulta/consulta.module";
 
 @NgModule({
   declarations: [
@@ -22,6 +25,16 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     ResetSenhaComponent,
     EnviarParaComponent
   ],
-  imports: [CommonModule, MatSelectModule, SharedModule, MatTableModule, MatGridListModule, FlexLayoutModule]
+  imports: [
+    CommonModule,
+    MatSelectModule,
+    SharedModule,
+    MatTableModule,
+    MatGridListModule,
+    FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ConsultaModule
+  ]
 })
 export class DadosPessoaisModule {}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot, ActivationStart, Router } from "@angular/router";
+import { ActivationStart, Router } from "@angular/router";
 import { filter } from "rxjs";
+import { Header } from "./header/model/Header";
 
 @Component({
   selector: "app-root",
@@ -10,12 +11,15 @@ import { filter } from "rxjs";
 export class AppComponent implements OnInit {
   title = "my-project.v2";
 
-  hasHeader!: boolean;
+  header!: Header;
 
-  constructor(public router: Router, private route: ActivatedRoute) {
+  constructor(public router: Router) {
     this.router.events.pipe(
       filter(event => event instanceof ActivationStart)).subscribe((event: any) => {
-        if(!this.hasHeader) this.hasHeader = event?.snapshot?.routeConfig?.data?.header
+        let temHeader = event?.snapshot?.routeConfig?.data?.header
+        if(temHeader) {
+          this.header = temHeader
+        }
     })
   }
 

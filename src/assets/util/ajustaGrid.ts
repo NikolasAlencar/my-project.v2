@@ -4,7 +4,7 @@ const cols: Cols = [
   { code: 1, value: 482 },
   { code: 2, value: 704 },
   { code: 3, value: 906 },
-  { code: 4, value: 2560 },
+  { code: 4, value: 2561 },
 ];
 
 export function ajustaGrid(){
