@@ -32,6 +32,7 @@
               matInput
               placeholder="Entre com a sua senha"
               formControlName="senha"
+              type="password"
               required
             />
             <mat-error
@@ -43,8 +44,6 @@
             >
           </mat-form-field>
         </div>
-
-        <!-- <spinner-load *ngIf="spinnerLoad"></spinner-load> -->
         <mat-progress-bar
           mode="indeterminate"
           *ngIf="loading"

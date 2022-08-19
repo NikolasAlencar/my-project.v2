@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { NavigationExtras, Router } from "@angular/router";
+import { NavigationExtras } from "@angular/router";
 import { formalizaValor } from "src/assets/util/formalizaValor";
 import { ConsultarService } from "./services/consultar.service";
-import { Acoes } from "./model/acoes";
+import { Acoes } from "./model/Acoes";
+import { NavigateService } from "../services/navigate.service";
 
 @Component({
   selector: "app-consulta",
@@ -14,7 +15,7 @@ export class ConsultaComponent implements OnInit {
   constructor(
     private fb: FormBuilder, //private telaInicioService: TelaInicioService, private loginService: LoginService,
     private consultarService: ConsultarService,
-    private router: Router
+    private navigate: NavigateService,
   ) {}
 
   @Input() reuse: boolean = false;
@@ -48,18 +49,17 @@ export class ConsultaComponent implements OnInit {
           this.loading = false;
           this.reuse ?
           this.emiteDados.emit(this.consultarService.getCliente()) :
-          this.router.navigate(["/home"], this.consultarService.getCliente() as NavigationExtras)
+          this.navigate.navegarParaHome(this.consultarService.getCliente() as NavigationExtras)
       })
     }else{
        this.consultar.markAllAsTouched();
        this.loading = false;
      }
-
   }
+
   ngOnInit(): void {
     this.consultar.get('radio')?.valueChanges.subscribe(() => this.opcaoSelecionada = this.consultar.get('radio')?.value-1)
-  // this.loginService.isLogged()
-  // this.subscriberService.verificaHasHeader(true)
-  // this.telaInicioService.adicionaHistoria(this.urlAtual)
+    // this.loginService.isLogged()
+    this.navigate.adicionaHistoria()
   }
 }

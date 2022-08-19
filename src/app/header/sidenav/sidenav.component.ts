@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { HeaderService } from "../services/header.service";
 
@@ -10,7 +10,7 @@ import { HeaderService } from "../services/header.service";
 export class SidenavComponent {
   constructor(private router: Router, private service: HeaderService) {}
 
-  options$ =  this.service.getOptions('optionsSidenav')
+  options$ =  this.service.getOptions('optionsSidenav') //arrumar dps caso não requira, loading infinito
 
   @Output() exit = new EventEmitter<boolean>()
 

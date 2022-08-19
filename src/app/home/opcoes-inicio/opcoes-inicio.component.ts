@@ -6,9 +6,6 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./opcoes-inicio.component.scss"]
 })
 export class OpcoesInicioComponent implements OnInit {
-  constructor() //private navigateService: NavigateService,
-  //   private loginService: LoginService,
-  //   private outlet: RouterOutlet
-  {}
+  constructor() {}
   ngOnInit(): void {}
 }

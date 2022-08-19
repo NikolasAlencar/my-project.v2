@@ -9,7 +9,10 @@ const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
-    children: [{ path: "dados-pessoais", component: DadosPessoaisComponent }, { path: "crivo", component: CrivoComponent }]
+    children: [
+      { path: "dados-pessoais", component: DadosPessoaisComponent },
+      { path: "crivo", component: CrivoComponent }
+    ]
   }
   // {
   //   path: "dados-pessoais",

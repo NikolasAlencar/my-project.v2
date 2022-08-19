@@ -6,10 +6,17 @@
     <span>{{ name }}</span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="icon">
-      <mat-icon>favorite</mat-icon>
+      <mat-icon (click)="voltar()">arrow_back</mat-icon>
     </button>
     <button mat-icon-button class="icon">
-      <mat-icon>share</mat-icon>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        fontIcon="home"
+        (click)="navegarHome()"
+      >
+        home</mat-icon
+      >
     </button>
   </mat-toolbar>
 </p>

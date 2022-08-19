@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { TesteComponent } from "./teste/teste.component";
 
 export const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "consulta" },
+  { path: "", pathMatch: "full", redirectTo: "login" },
   {
     path: "home",
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule),
@@ -16,7 +16,12 @@ export const routes: Routes = [
   },
   {
     path: "login",
-    loadChildren: () => import("./login/login.module").then(m => m.LoginModule)
+    loadChildren: () => import("./login/login.module").then(m => m.LoginModule),
+    data: {
+      header: {
+        hasHeader: false,
+      }
+    }
   },
   {
     path: "consulta",

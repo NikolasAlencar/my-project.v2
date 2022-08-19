@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigateService } from '../services/navigate.service';
+import { HomeService } from './services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -8,30 +9,16 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private navigate: NavigateService, private service: HomeService) { }
 
-  public opcoes: Array<any> = [
-    { nome: "Dados pessoais", id: 1, path: "dados-pessoais" },
-    { nome: "Crivo", id: 2, path: "crivo" },
-    { nome: "PLD", id: 3, path: "" },
-    { nome: "Identificação biométrica", id: 4, path: "" },
-    { nome: "Notificações", id: 6, path: "" },
-    { nome: "Bloquear/Desbloquear dispositivo" },
-    { nome: "Portabilidade", id: 7, path: "" },
-    { nome: "Comprovantes", id: 8, path: "" },
-    { nome: "Token", id: 9, path: "" },
-    { nome: "Token - Log", id: 10, path: "" },
-    { nome: "Cartões", id: 11, path: "" },
-    { nome: "Cartões BCD", id: 12, path: "" },
-    { nome: "MGM", id: 13, path: "" }
-  ];
+  options$ = this.service.getOptions('optionsHome')
 
   public navegarOpcaoSelecionada = (path: string) => {
-    console.log('Navegou', path)
-    this.router.navigate([`home/${path}`])
+    this.navigate.navegarOpcaoSelecionada(path)
   };
 
   ngOnInit(): void {
+    this.navigate.adicionaHistoria()
   }
 
 }

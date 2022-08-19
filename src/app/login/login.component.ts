@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { NavigateService } from "../services/navigate.service";
 
 @Component({
   selector: "app-login",
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     //private telaInicioService: TelaInicioService,
     //private registerService: RegisterService,
     //private loginService: LoginService,
-    private router: Router,
+    private navigate: NavigateService,
     //private _bottomSheet: MatBottomSheet,
     private fb: FormBuilder
   ) {}
@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     senha: ["", [Validators.required, Validators.minLength(7), Validators.maxLength(20)]]
   });
 
-  //private urlAtual = this.route.snapshot.url.join("");
   public loading: boolean = false;
 
   entrar = () => {
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.login.markAsUntouched();
       this.loading = false;
-      this.router.navigate(["/consulta"]);
+      this.navigate.navegarParaConsulta()
       //this.telaInicioService.entrar(this.login.value.usuario, this.login.value.senha);
     }
   };
@@ -43,6 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.navigate.adicionaHistoria()
     //this.subscriberService.verificaHasHeader(false);
     //this.telaInicioService.adicionaHistoria(this.urlAtual);
     //this.loginService.autenticado = false;
