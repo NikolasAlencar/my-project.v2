@@ -9,11 +9,8 @@ import { NavigateService } from "../services/navigate.service";
 })
 export class LoginComponent implements OnInit {
   constructor(
-    //private telaInicioService: TelaInicioService,
-    //private registerService: RegisterService,
     //private loginService: LoginService,
     private navigate: NavigateService,
-    //private _bottomSheet: MatBottomSheet,
     private fb: FormBuilder
   ) {}
 
@@ -24,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   public loading: boolean = false;
 
-  entrar = () => {
+  entrar(){
     this.loading = true;
     if (this.login.valid === false) {
       this.login.markAllAsTouched();
@@ -37,14 +34,12 @@ export class LoginComponent implements OnInit {
     }
   };
 
-  openBottomSheet(): void {
-    //this._bottomSheet.open(BottomSheetComponent);
+  registrar(){
+    this.navigate.navegarParaRegistro()
   }
 
   ngOnInit(): void {
     this.navigate.adicionaHistoria()
-    //this.subscriberService.verificaHasHeader(false);
-    //this.telaInicioService.adicionaHistoria(this.urlAtual);
     //this.loginService.autenticado = false;
     //this.registerService.success = false;
   }

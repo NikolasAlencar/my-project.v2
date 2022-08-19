@@ -17,9 +17,7 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof ActivationStart)).subscribe((event: any) => {
         let temHeader = event?.snapshot?.routeConfig?.data?.header
-        if(temHeader) {
-          this.header = temHeader
-        }
+        if(temHeader) this.header = temHeader
     })
   }
 

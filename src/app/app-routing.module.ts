@@ -34,6 +34,16 @@ export const routes: Routes = [
     }
   },
   {
+    path: "register",
+    loadChildren: () => import("./register/register.module").then(m => m.RegisterModule),
+    data: {
+      header: {
+        hasHeader: false,
+        name: "Consulta"
+      }
+    }
+  },
+  {
     path: "teste",
     component: TesteComponent
   }

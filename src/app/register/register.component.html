@@ -1,0 +1,39 @@
+<mat-card>
+  <form
+    [formGroup]="registrar"
+    novalidate
+    (ngSubmit)="cadastrar()"
+    *ngIf="options$ | async as options; else spinnerLoad"
+  >
+    <div class="criar-conta">Criar conta</div>
+    <mat-stepper orientation="vertical" [linear]="false" #stepper>
+      <mat-step *ngFor="let option of options">
+        <ng-template matStepLabel>{{ option.desc }}</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>{{ option.name }}</mat-label>
+          <input
+            matInput
+            placeholder="{{ option.placeholder }}"
+            formControlName="{{ option.name }}"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Finalizar</ng-template>
+        <p>Você está pronto para finalizar o seu cadastro!</p>
+        <div>
+          <button mat-button matStepperPrevious type="button">Voltar ao login</button>
+          <button mat-button type="submit">Cadastrar</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</mat-card>
+
+<ng-template #spinnerLoad>
+  <mat-spinner></mat-spinner>
+</ng-template>

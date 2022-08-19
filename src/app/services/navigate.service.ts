@@ -21,6 +21,10 @@ export class NavigateService {
     this.router.navigate(["/consulta"]);
   }
 
+  navegarParaRegistro() {
+    this.router.navigate(["/register"]);
+  }
+
   navegarOpcaoSelecionada(local: string) {
     this.router.navigate(["/home/" + local]);
   }

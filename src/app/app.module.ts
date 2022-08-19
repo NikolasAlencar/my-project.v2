@@ -14,6 +14,7 @@ import { HeaderModule } from "./header/header.module";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { NgxMaskModule } from "ngx-mask";
 import { HttpClientModule } from "@angular/common/http";
+import { RegisterModule } from "./register/register.module";
 
 @NgModule({
   declarations: [AppComponent, TesteComponent],
@@ -29,6 +30,7 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderModule,
     MatSidenavModule,
     HttpClientModule,
+    RegisterModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     })
