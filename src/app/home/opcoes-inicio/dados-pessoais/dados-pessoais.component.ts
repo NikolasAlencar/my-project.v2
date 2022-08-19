@@ -16,7 +16,7 @@ export class DadosPessoaisComponent implements OnInit {
   @Output() emiteDados = new EventEmitter<any>()
 
   recebeDados($event: any){
-    this.service.dados$.next($event) ;
+    $event.update ? this.service.updateClient($event.dados) : this.service.dados$.next($event.dados)
   }
 
   ngOnInit(): void { }

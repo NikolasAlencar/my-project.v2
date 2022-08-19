@@ -4,6 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConsultaComponent } from "src/app/consulta/consulta.component";
 import { ConsultarService } from "src/app/consulta/services/consultar.service";
 import { ajustaGrid } from "src/assets/util/ajustaGrid";
+import { separaNome } from "src/assets/util/separaNome";
 import { OptionsDados } from "./model/OptionDado";
 import { OptionsEndereco } from "./model/OptionEndereco";
 
@@ -23,7 +24,7 @@ export class DadosComponent implements OnInit{
     //  this.atualizaDados(data);
     //});
   }
-  
+
   public innerWidth = ajustaGrid();
 
   @HostListener("window:resize")
@@ -44,7 +45,9 @@ export class DadosComponent implements OnInit{
   @Input() clienteConsultado: any;
   @Output() emiteDados = new EventEmitter<any>();
 
-  startDate = new Date(2022, 0, 1);
+  //startDate = new Date(2022, 0, 1);
+  maxDate = new Date(new Date().getFullYear()-18, 0, 1)
+  minDate = new Date(new Date().getFullYear()-80, 0, 1)
 
   optionsDados: OptionsDados = [
     { name: "id", desc: "Id", erro: "" },
@@ -69,7 +72,7 @@ export class DadosComponent implements OnInit{
     nomeCompleto: ["", [Validators.required, Validators.minLength(20), Validators.maxLength(70)]],
     cpf: ["", [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
     id: [""],
-    dataDeNascimento: ["aaa"],
+    dataDeNascimento: [""],
     email: ["", [Validators.required, Validators.minLength(20), Validators.maxLength(50)]],
     nomeDaMae: ["", [Validators.required, Validators.minLength(15), Validators.maxLength(100)]],
     endereco: this.fb.group({
@@ -84,19 +87,18 @@ export class DadosComponent implements OnInit{
   });
 
   public confirmar(): void {
-    console.log(this.formulario.value)
-    // if (this.formulario.valid === false) {
-    //   this.formulario.markAllAsTouched();
-    // } else {
-    //   this.formulario.markAsUntouched();
-    //   this.clienteConsultado = Object.assign(this.clienteConsultado, this.formulario.value);
-    //   //this.telaInicioService.updateClient(this.clienteConsultado);
-    // }
+    if(this.formulario.valid){
+      const dataDeNascimento = new Date(this.formulario.value.dataDeNascimento).toLocaleDateString()
+      const nomeSeparado = separaNome(this.formulario.value.nomeCompleto)
+      this.clienteConsultado = Object.assign(this.clienteConsultado, {...this.formulario.value, ...nomeSeparado })
+      this.clienteConsultado.dataDeNascimento = dataDeNascimento
+      this.emiteDados.emit({dados: this.clienteConsultado, update: true})
+    }
   }
 
   public recebeDados($event: any){
     this.clienteConsultado = $event
-    this.emiteDados.emit($event)
+    this.emiteDados.emit({dados: $event, update: false})
     this.dialog.closeAll()
     this.populaDados()
   }
@@ -108,6 +110,8 @@ export class DadosComponent implements OnInit{
         this.formulario.get('endereco')?.get(option.name)?.setValue(this.clienteConsultado.endereco[option.name])
       }else if(option.name === 'nomeCompleto'){
         this.formulario.get('nomeCompleto')?.setValue(this.clienteConsultado.nome + " " + this.clienteConsultado.sobrenome)
+      }else if(option.name === 'dataDeNascimento'){
+        this.formulario.get(option.name)?.setValue(new Date(this.clienteConsultado[option.name]))
       }else{
         this.formulario.get(option.name)?.setValue(this.clienteConsultado[option.name])
       }

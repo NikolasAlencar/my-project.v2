@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { NavigationExtras } from "@angular/router";
 import { formalizaValor } from "src/assets/util/formalizaValor";
 import { ConsultarService } from "./services/consultar.service";
-import { Acoes } from "./model/Acoes";
 import { NavigateService } from "../services/navigate.service";
 
 @Component({
@@ -14,7 +13,7 @@ import { NavigateService } from "../services/navigate.service";
 export class ConsultaComponent implements OnInit {
   constructor(
     private fb: FormBuilder, //private telaInicioService: TelaInicioService, private loginService: LoginService,
-    private consultarService: ConsultarService,
+    private service: ConsultarService,
     private navigate: NavigateService,
   ) {}
 
@@ -29,12 +28,7 @@ export class ConsultaComponent implements OnInit {
     "Agência/Conta": ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]]
   });
 
-  public acoes: Acoes = [
-    { nome: "CPF", opcao: 1, descricao: "Digite o CPF", erro: "Campo CPF é obrigatório" },
-    { nome: "Agência/Conta", opcao: 2, descricao: "Digite a Agência/Conta", erro: "Campo Agência/Conta é obrigatório" },
-    { nome: "Celular", opcao: 3, descricao: "Digite o Celular", erro: "Campo Celular é obrigatório" },
-    { nome: "userId", opcao: 4, descricao: "Digite o userId", erro: "Campo userId é obrigatório" }
-  ];
+  acoes$ = this.service.getOptions('consultarAcoes');
 
   public loading: boolean = false;
   public opcaoSelecionada: number = 0;
@@ -43,13 +37,13 @@ export class ConsultaComponent implements OnInit {
     this.loading = true;
     if(this.consultar.controls[opcaoSelecionada].valid){
       this.consultar.markAsUntouched();
-      this.consultarService.consultar(formalizaValor(opcaoSelecionada), this.consultar.get(opcaoSelecionada)?.value)
-        .subscribe(c => {
-          this.consultarService.setCliente(c[0])
+      this.service.consultar(formalizaValor(opcaoSelecionada), this.consultar.get(opcaoSelecionada)?.value)
+        .subscribe((c: any[]) => {
+          this.service.setCliente(c[0])
           this.loading = false;
           this.reuse ?
-          this.emiteDados.emit(this.consultarService.getCliente()) :
-          this.navigate.navegarParaHome(this.consultarService.getCliente() as NavigationExtras)
+          this.emiteDados.emit(this.service.getCliente()) :
+          this.navigate.navegarParaHome(this.service.getCliente() as NavigationExtras)
       })
     }else{
        this.consultar.markAllAsTouched();

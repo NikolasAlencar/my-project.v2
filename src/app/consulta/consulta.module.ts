@@ -7,10 +7,19 @@ import { SharedModule } from "../shared/shared.module";
 import { MatButtonModule } from "@angular/material/button";
 import { MatRadioModule } from "@angular/material/radio";
 import { NgxMaskModule } from "ngx-mask";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [ConsultaComponent],
-  imports: [CommonModule, ConsultaRoutingModule, SharedModule, MatButtonModule, MatRadioModule, NgxMaskModule.forChild()],
+  imports: [
+    CommonModule,
+    ConsultaRoutingModule,
+    SharedModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    NgxMaskModule.forChild()
+  ],
   exports: [ConsultaComponent]
 })
 export class ConsultaModule {}

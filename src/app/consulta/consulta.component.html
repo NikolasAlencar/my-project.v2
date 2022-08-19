@@ -1,7 +1,12 @@
 <div [ngClass]="reuse ? '' : 'a'">
   <div [ngClass]="reuse ? '' : 'principal'">
     <div class="title">Consultar cliente</div>
-    <form [formGroup]="consultar" novalidate (ngSubmit)="pesquisar(acoes[opcaoSelecionada].nome)">
+    <form
+      [formGroup]="consultar"
+      novalidate
+      (ngSubmit)="pesquisar(acoes[opcaoSelecionada].nome)"
+      *ngIf="acoes$ | async as acoes; else spinnerLoad"
+    >
       <div class="primary">
         <div class="container">
           <mat-radio-group formControlName="radio">
@@ -12,7 +17,10 @@
             >
           </mat-radio-group>
 
-          <mat-form-field appearance="fill" *ngIf="acoes[opcaoSelecionada].nome === 'CPF'">
+          <mat-form-field
+            appearance="fill"
+            *ngIf="acoes[opcaoSelecionada].nome === 'CPF'"
+          >
             <mat-label>{{ acoes[opcaoSelecionada].nome }}</mat-label>
             <input
               matInput
@@ -26,7 +34,10 @@
             }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" *ngIf="acoes[opcaoSelecionada].nome === 'Agência/Conta'">
+          <mat-form-field
+            appearance="fill"
+            *ngIf="acoes[opcaoSelecionada].nome === 'Agência/Conta'"
+          >
             <mat-label>{{ acoes[opcaoSelecionada].nome }}</mat-label>
             <input
               matInput
@@ -40,7 +51,10 @@
             }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" *ngIf="acoes[opcaoSelecionada].nome === 'Celular'">
+          <mat-form-field
+            appearance="fill"
+            *ngIf="acoes[opcaoSelecionada].nome === 'Celular'"
+          >
             <mat-label>{{ acoes[opcaoSelecionada].nome }}</mat-label>
             <input
               matInput
@@ -54,7 +68,10 @@
             }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" *ngIf="acoes[opcaoSelecionada].nome === 'userId'">
+          <mat-form-field
+            appearance="fill"
+            *ngIf="acoes[opcaoSelecionada].nome === 'userId'"
+          >
             <mat-label>{{ acoes[opcaoSelecionada].nome }}</mat-label>
             <input
               matInput
@@ -66,7 +83,6 @@
               acoes[opcaoSelecionada].erro
             }}</mat-error>
           </mat-form-field>
-
         </div>
         <mat-progress-bar
           mode="indeterminate"
@@ -81,6 +97,10 @@
     </form>
   </div>
 </div>
+
+<ng-template #spinnerLoad>
+  <mat-spinner></mat-spinner>
+</ng-template>
 
 <!-- <ng-template #agenciaConta>
    Arrumar depois

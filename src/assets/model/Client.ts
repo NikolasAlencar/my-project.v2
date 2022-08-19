@@ -1,5 +1,5 @@
 export interface Client{
-    agência: string,
+    agencia: string,
     area: string,
     cadastroCriadoEm: any,
     cadastroIniciadoEm: any,
@@ -22,5 +22,5 @@ export interface Client{
     senha: string,
     sobrenome: string,
     id: any,
-    usuario: string,   
+    usuario: string,
 }
