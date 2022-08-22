@@ -3,12 +3,24 @@ mat-card{
   justify-content: center;
   align-items: center;
   height: 100%;
+  background-color: white !important;
+}
+
+form{
+  border-radius: 0.3rem;
 }
 
 .criar-conta{
+  background-color: #c2185b;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.3rem 0.3rem 0rem 0rem;
+}
+
+.error{
+  color: red
 }
 

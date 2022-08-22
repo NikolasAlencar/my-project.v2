@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { OptionsRegister } from '../model/OptionRegister';
 
 @Injectable({
@@ -14,5 +15,17 @@ export class RegisterService {
 
   getOptions(option: string): Observable<any> {
     return this.http.get<OptionsRegister>(`${this.url_api}/${option}`)
+  }
+
+  getUser(userName: string): Observable<any> {
+    return this.http.get<OptionsRegister>(`${this.url_api}/users?usuario=${userName}`)
+  }
+
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get<OptionsRegister>(`${this.url_api}/users?email=${email}`)
+  }
+
+  addUser(user: any): Observable<any> {
+    return this.http.post(`${this.url_api}/users`, user)
   }
 }

@@ -5,7 +5,9 @@
     (ngSubmit)="cadastrar()"
     *ngIf="options$ | async as options; else spinnerLoad"
   >
-    <div class="criar-conta">Criar conta</div>
+    <div class="criar-conta">
+      Criar conta <img src="../../assets/icons/adicionar-usuario.png" />
+    </div>
     <mat-stepper orientation="vertical" [linear]="false" #stepper>
       <mat-step *ngFor="let option of options">
         <ng-template matStepLabel>{{ option.desc }}</ng-template>
@@ -15,19 +17,54 @@
             matInput
             placeholder="{{ option.placeholder }}"
             formControlName="{{ option.name }}"
+            type="{{ option.name === 'senha' ? 'password' : '' }}"
             required
           />
         </mat-form-field>
+        <mat-error
+          class="form-text text-danger"
+          *ngIf="
+            !registrar.get(option.name)?.valid &&
+            registrar.get(option.name)?.touched
+          "
+          >Campo invalido!
+          {{ registrar.get(option.name)?.errors?.['jaExiste'] ? option.name + ' já existe!`' : '' }}
+        </mat-error>
         <div>
-          <button mat-button matStepperNext>Próximo</button>
+          <button
+            mat-button
+            matStepperNext
+            type="button"
+            *ngIf="
+              registrar.get(option.name)?.valid &&
+              registrar.get(option.name)?.touched
+            "
+          >
+            Próximo
+          </button>
         </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Finalizar</ng-template>
-        <p>Você está pronto para finalizar o seu cadastro!</p>
+        <p [ngClass]="registrar.valid ? '' : 'error'">
+          {{
+            registrar.valid
+              ? "Você está pronto para finalizar o seu cadastro!"
+              : "Verifique as informações e tente novamente!"
+          }}
+        </p>
         <div>
-          <button mat-button matStepperPrevious type="button">Voltar ao login</button>
-          <button mat-button type="submit">Cadastrar</button>
+          <button
+            mat-button
+            matStepperPrevious
+            type="button"
+            (click)="voltarLogin()"
+          >
+            Voltar ao login
+          </button>
+          <button mat-button type="submit" [disabled]="registrar.invalid">
+            Cadastrar
+          </button>
         </div>
       </mat-step>
     </mat-stepper>
@@ -36,4 +73,8 @@
 
 <ng-template #spinnerLoad>
   <mat-spinner></mat-spinner>
+</ng-template>
+
+<ng-template #emailEnviado>
+
 </ng-template>
