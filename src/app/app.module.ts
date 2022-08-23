@@ -18,6 +18,7 @@ import { RegisterModule } from "./register/register.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ErroGenericoComponent } from "./erro-generico/erro-generico.component";
 import { SharedModule } from "./shared/shared.module";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [AppComponent, TesteComponent, ErroGenericoComponent],
@@ -37,6 +38,7 @@ import { SharedModule } from "./shared/shared.module";
     RegisterModule,
     MatIconModule,
     SharedModule,
+    MatSnackBarModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     })

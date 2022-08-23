@@ -11,6 +11,7 @@ import { OptionsContaDigital } from "./model/OptionContaDigital";
   styleUrls: ["./conta-digital.component.scss"]
 })
 export class ContaDigitalComponent implements OnInit {
+  
   public innerWidth = ajustaGrid();
 
   @HostListener("window:resize")

@@ -5,7 +5,8 @@ import { formalizaValor } from "src/assets/util/formalizaValor";
 import { ConsultarService } from "./services/consultar.service";
 import { NavigateService } from "../services/navigate.service";
 import { ErrorService } from "../services/error.service";
-import { catchError, tap } from "rxjs";
+import { catchError } from "rxjs";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-consulta",
@@ -47,11 +48,16 @@ export class ConsultaComponent implements OnInit {
           catchError(async (error) => this.erroService.trazerErro()),
         )
         .subscribe((c: any[]) => {
-          this.service.setCliente(c[0])
-          this.loading = false;
-          this.reuse ?
-          this.emiteDados.emit(this.service.getCliente()) :
-          this.navigate.navegarParaHome(this.service.getCliente() as NavigationExtras)
+          if(_.isEmpty(c)){
+            this.erroService.erroConsulta('Não foi encontrado dados para a sua pesquisa!');
+            this.loading = false;
+          }else{
+            this.service.setCliente(c[0])
+            this.loading = false;
+            this.reuse ?
+            this.emiteDados.emit(this.service.getCliente()) :
+            this.navigate.navegarParaHome(this.service.getCliente() as NavigationExtras)
+          }
       })
     }else{
        this.consultar.markAllAsTouched();

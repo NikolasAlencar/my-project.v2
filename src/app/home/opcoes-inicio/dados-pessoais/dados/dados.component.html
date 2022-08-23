@@ -6,12 +6,16 @@
       <div class="separator">
         <div *ngFor="let option of optionsDados">
           <mat-grid-tile>
-            <mat-form-field appearance="outline" *ngIf="option.name !== 'dataDeNascimento'; else datepicker">
+            <mat-form-field
+              appearance="outline"
+              *ngIf="option.name !== 'dataDeNascimento'; else datepicker"
+            >
               <mat-label>{{ option.desc }}</mat-label>
               <input
                 matInput
                 formControlName="{{ option.name }}"
                 required
+                readonly="{{ option.name === 'id' ? true : false }}"
               />
               <mat-error
                 *ngIf="
@@ -36,10 +40,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="outline">
               <mat-label>{{ option.desc }}</mat-label>
-              <input
-                matInput
-                formControlName="{{ option.name }}"
-              />
+              <input matInput formControlName="{{ option.name }}" />
               <mat-error
                 *ngIf="
                   !formulario.get(option.erro)?.valid &&
@@ -54,7 +55,13 @@
       </div>
     </mat-grid-list>
     <div class="botao">
-      <button mat-raised-button color="primary" class="consultar" type="button" (click)="abrirConsulta('again')">
+      <button
+        mat-raised-button
+        color="primary"
+        class="consultar"
+        type="button"
+        (click)="abrirConsulta('again')"
+      >
         Consultar novamente
       </button>
       <button mat-raised-button color="primary" type="submit">
@@ -65,11 +72,18 @@
 </form>
 
 <ng-template #datepicker>
-  <mat-form-field appearance="fill" [formGroup]=formulario>
+  <mat-form-field appearance="fill" [formGroup]="formulario">
     <mat-label>Choose a date</mat-label>
-    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dataDeNascimento">
+    <input
+      matInput
+      [min]="minDate"
+      [max]="maxDate"
+      [matDatepicker]="picker"
+      formControlName="dataDeNascimento"
+    />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker startView="month" ></mat-datepicker> <!--[startAt]="startDate"-->
+    <mat-datepicker #picker startView="month"></mat-datepicker>
+    <!--[startAt]="startDate"-->
   </mat-form-field>
 </ng-template>
 
@@ -77,5 +91,8 @@
   <mat-error class="erro-personalizado">
     {{ erro }}
   </mat-error>
-  <app-consulta [reuse]="true" (emiteDados)="recebeDados($event)"></app-consulta>
+  <app-consulta
+    [reuse]="true"
+    (emiteDados)="recebeDados($event)"
+  ></app-consulta>
 </ng-template>
