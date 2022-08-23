@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
+import { catchError, distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
 import { NavigateService } from '../services/navigate.service';
 import { RegisterService } from './services/register.service';
 import * as _ from "lodash";
 import { NavigationExtras } from '@angular/router';
 import { randomNum } from 'src/assets/util/randomNum';
+import { ErrorService } from '../services/error.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ import { randomNum } from 'src/assets/util/randomNum';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: RegisterService, private navigate: NavigateService) {}
+  constructor(private fb: FormBuilder, private service: RegisterService, private navigate: NavigateService, private errorService: ErrorService) {}
 
   registrar = this.fb.group({
     usuario: ['', [Validators.required, Validators.minLength(7)]],
@@ -23,7 +24,10 @@ export class RegisterComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   });
 
-  options$ = this.service.getOptions('optionsRegister')
+  options$ = this.service.getOptions('optionsRegister').pipe(
+    catchError(async (error) => this.errorService.trazerErro())
+  )
+
   emailEnviado: boolean = false;
 
   cadastrar(){

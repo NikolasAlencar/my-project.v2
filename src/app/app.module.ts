@@ -15,9 +15,12 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { NgxMaskModule } from "ngx-mask";
 import { HttpClientModule } from "@angular/common/http";
 import { RegisterModule } from "./register/register.module";
+import { MatDialogModule } from "@angular/material/dialog";
+import { ErroGenericoComponent } from "./erro-generico/erro-generico.component";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [AppComponent, TesteComponent],
+  declarations: [AppComponent, TesteComponent, ErroGenericoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +33,10 @@ import { RegisterModule } from "./register/register.module";
     HeaderModule,
     MatSidenavModule,
     HttpClientModule,
+    MatDialogModule,
     RegisterModule,
+    MatIconModule,
+    SharedModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     })

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError } from 'rxjs';
+import { ErrorService } from '../services/error.service';
 import { NavigateService } from '../services/navigate.service';
 import { HomeService } from './services/home.service';
 
@@ -9,9 +11,11 @@ import { HomeService } from './services/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private navigate: NavigateService, private service: HomeService) { }
+  constructor(private navigate: NavigateService, private service: HomeService, private errorService: ErrorService) { }
 
-  options$ = this.service.getOptions('optionsHome')
+  options$ = this.service.getOptions('optionsHome').pipe(
+    catchError(async (error) => this.errorService.trazerErro())
+  )
 
   public navegarOpcaoSelecionada = (path: string) => {
     this.navigate.navegarOpcaoSelecionada(path)

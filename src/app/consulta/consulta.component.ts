@@ -4,6 +4,8 @@ import { NavigationExtras } from "@angular/router";
 import { formalizaValor } from "src/assets/util/formalizaValor";
 import { ConsultarService } from "./services/consultar.service";
 import { NavigateService } from "../services/navigate.service";
+import { ErrorService } from "../services/error.service";
+import { catchError, tap } from "rxjs";
 
 @Component({
   selector: "app-consulta",
@@ -15,6 +17,7 @@ export class ConsultaComponent implements OnInit {
     private fb: FormBuilder, //private telaInicioService: TelaInicioService, private loginService: LoginService,
     private service: ConsultarService,
     private navigate: NavigateService,
+    private erroService: ErrorService
   ) {}
 
   @Input() reuse: boolean = false;
@@ -28,7 +31,9 @@ export class ConsultaComponent implements OnInit {
     "Agência/Conta": ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]]
   });
 
-  acoes$ = this.service.getOptions('consultarAcoes');
+  acoes$ = this.service.getOptions('consultarAcoes').pipe(
+    catchError(async (error) => this.erroService.trazerErro())
+  );
 
   public loading: boolean = false;
   public opcaoSelecionada: number = 0;
@@ -38,6 +43,9 @@ export class ConsultaComponent implements OnInit {
     if(this.consultar.controls[opcaoSelecionada].valid){
       this.consultar.markAsUntouched();
       this.service.consultar(formalizaValor(opcaoSelecionada), this.consultar.get(opcaoSelecionada)?.value)
+        .pipe(
+          catchError(async (error) => this.erroService.trazerErro()),
+        )
         .subscribe((c: any[]) => {
           this.service.setCliente(c[0])
           this.loading = false;

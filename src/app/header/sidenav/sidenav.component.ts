@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { Router } from "@angular/router";
+import { catchError } from "rxjs";
+import { ErrorService } from "src/app/services/error.service";
 import { HeaderService } from "../services/header.service";
 
 @Component({
@@ -8,9 +10,9 @@ import { HeaderService } from "../services/header.service";
   styleUrls: ["./sidenav.component.scss"]
 })
 export class SidenavComponent {
-  constructor(private router: Router, private service: HeaderService) {}
+  constructor(private router: Router, private service: HeaderService, private errorService: ErrorService) {}
 
-  options$ =  this.service.getOptions('optionsSidenav') //arrumar dps caso não requira, loading infinito
+  options$ =  this.service.getOptions('optionsSidenav').pipe(catchError(async (error) => this.errorService.trazerErro()))
 
   @Output() exit = new EventEmitter<boolean>()
 

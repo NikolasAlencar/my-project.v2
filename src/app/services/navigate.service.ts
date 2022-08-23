@@ -21,6 +21,10 @@ export class NavigateService {
     this.router.navigate(["/consulta"]);
   }
 
+  navegarParaErro() {
+    this.router.navigate(["/erro-generico"]);
+  }
+
   navegarParaRegistro() {
     this.router.navigate(["/register"]);
   }

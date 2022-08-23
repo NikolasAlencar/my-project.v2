@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ErroGenericoComponent } from "./erro-generico/erro-generico.component";
 import { TesteComponent } from "./teste/teste.component";
 
 export const routes: Routes = [
@@ -38,8 +39,16 @@ export const routes: Routes = [
     loadChildren: () => import("./register/register.module").then(m => m.RegisterModule),
     data: {
       header: {
-        hasHeader: false,
-        name: "Consulta"
+        hasHeader: false
+      }
+    }
+  },
+  {
+    path: "erro-generico",
+    component: ErroGenericoComponent,
+    data: {
+      header: {
+        hasHeader: false
       }
     }
   },

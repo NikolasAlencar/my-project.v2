@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { catchError } from "rxjs/operators";
+import { ErrorService } from "src/app/services/error.service";
 import { CrivoService } from "./services/crivo.service";
 
 @Component({
@@ -8,9 +10,11 @@ import { CrivoService } from "./services/crivo.service";
 })
 export class CrivoComponent implements OnInit {
 
-  constructor(private service: CrivoService){}
+  constructor(private service: CrivoService, private errorService: ErrorService){}
 
-  options$ = this.service.getOptions('optionsCrivo')
+  options$ = this.service.getOptions('optionsCrivo').pipe(
+    catchError(async (error) => this.errorService.trazerErro())
+  )
 
   public legendas: Array<string> = ["green", "red", "yellow", "grey"];
 
