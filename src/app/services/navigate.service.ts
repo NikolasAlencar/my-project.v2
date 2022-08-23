@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import { NavigationExtras, Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -23,6 +23,10 @@ export class NavigateService {
 
   navegarParaRegistro() {
     this.router.navigate(["/register"]);
+  }
+
+  navegarParaLastStep(params?: any, cod?: any) {
+    this.router.navigate(["/register/last-step"], {params, cod} as NavigationExtras);
   }
 
   navegarOpcaoSelecionada(local: string) {

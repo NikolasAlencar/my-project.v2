@@ -5,6 +5,8 @@ import { distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
 import { NavigateService } from '../services/navigate.service';
 import { RegisterService } from './services/register.service';
 import * as _ from "lodash";
+import { NavigationExtras } from '@angular/router';
+import { randomNum } from 'src/assets/util/randomNum';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +27,10 @@ export class RegisterComponent implements OnInit {
   emailEnviado: boolean = false;
 
   cadastrar(){
-    console.log(this.registrar)
+    this.service.cod = randomNum(100000, 999999)
+    this.service.enviaEmailRegister(this.registrar.get('email')?.value, this.service.cod).subscribe(() => {
+      this.navigate.navegarParaLastStep(this.registrar.value)
+    })
   }
 
   voltarLogin(){
