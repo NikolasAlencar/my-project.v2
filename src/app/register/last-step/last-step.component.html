@@ -29,7 +29,7 @@
         <mat-error *ngIf="registrar.invalid">Código inválido!</mat-error>
       </mat-form-field>
 
-      <mat-error *ngIf="acabouTempo" (click)="timer.iniciarContagem(); reiniciar()"
+      <mat-error class="cabouse" *ngIf="acabouTempo" (click)="timer.iniciarContagem(); reiniciar()"
         >Acabou o tempo, clique aqui para enviar novamente!</mat-error
       >
 

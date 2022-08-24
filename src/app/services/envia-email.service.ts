@@ -9,6 +9,6 @@ export class EnviaEmailService {
   constructor(private http: HttpClient) { }
 
   enviaEmail(corpoEmail: any){
-    return this.http.post('http://localhost:3030', corpoEmail)
+    return this.http.post('http://localhost:5000', corpoEmail)
   }
 }

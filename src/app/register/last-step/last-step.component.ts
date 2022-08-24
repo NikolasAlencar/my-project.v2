@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { map, tap, distinctUntilChanged, filter } from "rxjs";
+import { map, tap, distinctUntilChanged, filter, catchError } from "rxjs";
+import { EnviaMensagemService } from "src/app/services/envia-mensagem.service";
+import { ErrorService } from "src/app/services/error.service";
 import { NavigateService } from "src/app/services/navigate.service";
 import { User } from "src/assets/model/User";
 import { randomNum } from "src/assets/util/randomNum";
@@ -14,7 +16,12 @@ import { RegisterService } from "../services/register.service";
 })
 export class LastStepComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router, private service: RegisterService, private navigate: NavigateService) {}
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private service: RegisterService,
+              private navigate: NavigateService,
+              private mensagemService: EnviaMensagemService,
+              private erroService: ErrorService) {}
 
   registrar = this.fb.group({ codigo: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(6)]] });
 
@@ -26,7 +33,7 @@ export class LastStepComponent implements OnInit {
 
   cadastrar(): void{
     this.service.addUser(this.user.params).subscribe(() => {
-      console.log('USUARIO CADASTRADO!')
+      this.mensagemService.sucesso(`O usuário ${this.user.params.usuario} foi criado!`)
       this.navigate.navegarParaLogin()
     })
   }
@@ -38,10 +45,13 @@ export class LastStepComponent implements OnInit {
 
   reiniciar(){
     this.service.cod = randomNum(100000, 999999)
-    this.service.enviaEmailRegister(this.user.params.email, this.service.cod).subscribe(() => this.acabouTempo = false)
+    this.service.enviaEmailRegister(this.user.params.email, this.service.cod)
+    .subscribe(() => this.acabouTempo = false)
   }
 
   ngOnInit(): void {
+    if(this.user) this.erroService.trazerErro()
+
     this.registrar.get('codigo')?.valueChanges.pipe(
       filter(v => v >=6 || v.length),
       distinctUntilChanged(),

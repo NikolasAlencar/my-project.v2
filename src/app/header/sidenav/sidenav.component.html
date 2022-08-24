@@ -1,7 +1,30 @@
 <mat-nav-list *ngIf="options$ | async as options; else spinnerLoad">
-  <mat-list-item class="option" *ngFor="let option of options" (click)="navegar(option)">
-    <img [src]="option.src">
-      <span>{{ option.desc }}</span>
+  <!-- <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Pesquisar funcionalidade</mat-label>
+      <input
+        type="text"
+        style="color: white"
+        placeholder="Procure por uma funcionalidade"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form> -->
+
+  <mat-list-item
+    class="option"
+    *ngFor="let option of options"
+    (click)="navegar(option)"
+  >
+    <img [src]="option.src" />
+    <span>{{ option.desc }}</span>
   </mat-list-item>
 </mat-nav-list>
 
