@@ -7,7 +7,6 @@ import { AppComponent } from "./app.component";
 import { LoginModule } from "./login/login.module";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
-import { TesteComponent } from "./teste/teste.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HeaderModule } from "./header/header.module";
@@ -21,7 +20,7 @@ import { SharedModule } from "./shared/shared.module";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
-  declarations: [AppComponent, TesteComponent, ErroGenericoComponent],
+  declarations: [AppComponent, ErroGenericoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

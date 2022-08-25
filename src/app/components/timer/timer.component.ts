@@ -55,8 +55,6 @@ export class TimerComponent implements OnChanges, OnInit {
   }
 
   iniciarContagem() {
-    console.time();
-
     this._dataInicial = new Date().getTime();
     this._segundosPassados = 0;
 
@@ -76,7 +74,7 @@ export class TimerComponent implements OnChanges, OnInit {
     if (this._segundosPassados > this.tempoSegundos) {
       this.circuloTimerCoordenadas = this.coordenadas.join(" ");
 
-      this.acabou.emit({ acabou: true })
+      this.acabou.emit({ acabou: true });
 
       return;
     }

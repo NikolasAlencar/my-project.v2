@@ -41,6 +41,10 @@ export class NavigateService {
     this.router.navigate(["/" + local]);
   }
 
+  navegar(local: any){
+    this.router.navigate(local)
+  }
+
   voltar() {
     this.navegarPara(this.historia[this.historia.length - 2]);
     this.historia.pop();

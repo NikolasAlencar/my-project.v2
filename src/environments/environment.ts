@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiSendEmail: "http://localhost:5000",
+  apiBd: "http://localhost:3000",
+  apiLogin: "http://localhost:3001",
+  imagesPath: 'assets',
+  name: 'My Project 2'
 };
 
 /*

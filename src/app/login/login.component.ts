@@ -1,5 +1,10 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { catchError, Subscription } from "rxjs";
+import { AuthorizationService } from "../authorization/authorization.service";
+import { EnviaMensagemService } from "../services/envia-mensagem.service";
+import { ErrorService } from "../services/error.service";
 import { NavigateService } from "../services/navigate.service";
 
 @Component({
@@ -9,9 +14,10 @@ import { NavigateService } from "../services/navigate.service";
 })
 export class LoginComponent implements OnInit {
   constructor(
-    //private loginService: LoginService,
+    private authService: AuthorizationService,
     private navigate: NavigateService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private errorService: ErrorService
   ) {}
 
   public login = this.fb.group({
@@ -21,26 +27,35 @@ export class LoginComponent implements OnInit {
 
   public loading: boolean = false;
 
-  entrar(){
+  entrar() {
     this.loading = true;
     if (this.login.valid === false) {
       this.login.markAllAsTouched();
       this.loading = false;
     } else {
       this.login.markAsUntouched();
-      this.loading = false;
-      this.navigate.navegarParaConsulta()
-      //this.telaInicioService.entrar(this.login.value.usuario, this.login.value.senha);
+      this.logar(this.login.value);
     }
-  };
+  }
 
-  registrar(){
-    this.navigate.navegarParaRegistro()
+  registrar() {
+    this.navigate.navegarParaRegistro();
+  }
+
+  private logar(user: any) {
+    this.authService
+      .login(user)
+      .pipe(catchError(async error => this.errorService.trazerErro()))
+      .subscribe(() => {
+        this.loading = false;
+        this.authService.redirectUrl
+          ? this.navigate.navegar(this.authService.redirectUrl)
+          : this.navigate.navegarParaConsulta();
+      });
   }
 
   ngOnInit(): void {
-    this.navigate.adicionaHistoria()
-    //this.loginService.autenticado = false;
-    //this.registerService.success = false;
+    this.authService.logout();
+    this.navigate.adicionaHistoria();
   }
 }

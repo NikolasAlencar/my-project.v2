@@ -1,13 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthorizationGuard } from "./authorization/authorization.guard";
 import { ErroGenericoComponent } from "./erro-generico/erro-generico.component";
-import { TesteComponent } from "./teste/teste.component";
 
 export const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
   {
     path: "home",
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule),
+    canLoad: [AuthorizationGuard],
     data: {
       header: {
         hasHeader: true,
@@ -27,6 +28,7 @@ export const routes: Routes = [
   {
     path: "consulta",
     loadChildren: () => import("./consulta/consulta.module").then(m => m.ConsultaModule),
+    canLoad: [AuthorizationGuard],
     data: {
       header: {
         hasHeader: true,
@@ -51,10 +53,6 @@ export const routes: Routes = [
         hasHeader: false
       }
     }
-  },
-  {
-    path: "teste",
-    component: TesteComponent
   }
 ];
 
