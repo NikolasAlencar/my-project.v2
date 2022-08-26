@@ -47,12 +47,12 @@ export class ConsultaComponent implements OnInit {
         .pipe(
           catchError(async (error) => this.erroService.trazerErro()),
         )
-        .subscribe((c: any[]) => {
+        .subscribe((c) => {
           if(_.isEmpty(c)){
             this.erroService.erroConsulta('Não foi encontrado dados para a sua pesquisa!');
             this.loading = false;
           }else{
-            this.service.setCliente(c[0])
+            this.service.setCliente(c)
             this.loading = false;
             this.reuse ?
             this.emiteDados.emit(this.service.getCliente()) :

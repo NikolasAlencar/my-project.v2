@@ -7,6 +7,8 @@ import { ConsultarAcoes } from "../model/ConsultarAcao";
 import { environment } from "src/environments/environment";
 import { bodyReq } from "src/assets/util/bodyReq";
 
+const {headers, body} = bodyReq
+
 @Injectable({
   providedIn: "root"
 })
@@ -16,24 +18,23 @@ export class ConsultarService {
   private clienteConsultado!: Client;
 
   getOptions(option: string): Observable<any> {
-    const {headers, body} = bodyReq
     return this.http.post<ConsultarAcoes>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 
   obtemClienteByCpf(cpf: string): Observable<any> {
-    return this.http.get(`${environment.api}/clientes?cpf=${cpf}`)
+    return this.http.post(`${environment.api}/obter/clientes/cpf`, {cpf}, {headers})
   }
 
   obtemClienteByAgenciaEConta(conta: string): Observable<any> {
-    return this.http.get(`${environment.api}/clientes?conta=${conta}`);
+    return this.http.post(`${environment.api}/obter/clientes/conta`, {conta}, {headers})
   }
 
   obtemClienteByCelular(celular: string): Observable<any> {
-    return this.http.get(`${environment.api}/clientes?celular=${celular}`);
+    return this.http.post(`${environment.api}/obter/clientes/celular`, {celular}, {headers})
   }
 
   obtemClienteByid(id: string): Observable<any> {
-    return this.http.get(`${environment.api}/clientes?id=${id}`);
+    return this.http.post(`${environment.api}/obter/clientes/id`, {id}, {headers})
   }
 
   consultar(opcaoSelecionada: string, valorDigitado: string): Observable<any> {
@@ -41,6 +42,7 @@ export class ConsultarService {
       case "cpf":
         return this.obtemClienteByCpf(valorDigitado);
       case "conta":
+        valorDigitado = valorDigitado.substring(5)
         return this.obtemClienteByAgenciaEConta(valorDigitado);
       case "celular":
         valorDigitado = retiraEspeciais(valorDigitado);
