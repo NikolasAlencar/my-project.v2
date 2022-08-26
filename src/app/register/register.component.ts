@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   });
 
-  options$ = this.service.getOptions('optionsRegister').pipe(
+  options$ = this.service.getOptions('options-register').pipe(
     catchError(async (error) => this.errorService.trazerErro())
   )
 

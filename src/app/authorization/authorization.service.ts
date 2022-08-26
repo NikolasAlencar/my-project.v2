@@ -1,13 +1,14 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { catchError, Observable, Subject } from 'rxjs';
 import { User } from './model/user';
 import { UserLogin } from './model/user-login';
 import { environment } from 'src/environments/environment';
+import { ErrorService } from '../services/error.service';
 
 
 const CACHE_KEY_TOKEN = 'TOKEN';
-const TOKEN_ENDPOINT = `${environment.apiLogin}/auth/login`;
+const TOKEN_ENDPOINT = `${environment.api}/auth/login`;
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthorizationService {
   public redirectUrl!: string;
   private _user: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorService: ErrorService) {}
 
   requestToken(user: any): Observable<HttpResponse<User>> {
     return this.http.post<User>(
@@ -33,7 +34,6 @@ export class AuthorizationService {
     const loginSubject = new Subject<User>();
     this.requestToken(user).subscribe(
       (response: HttpResponse<any>) => {
-        console.log(response)
         const { body: loggedUser } = response;
         loggedUser.token = response.headers.get('x-access-token');
         this.saveUserInfo(loggedUser);
@@ -51,9 +51,6 @@ export class AuthorizationService {
     this.setUser(this._user);
   }
 
-  /**
-   * Efetua o logout do usuário autenticado.
-   */
   logout(): void {
     this._user = undefined;
     this.removeUser();

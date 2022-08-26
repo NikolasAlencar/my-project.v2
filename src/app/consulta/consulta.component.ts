@@ -32,7 +32,7 @@ export class ConsultaComponent implements OnInit {
     "Agência/Conta": ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]]
   });
 
-  acoes$ = this.service.getOptions('consultarAcoes').pipe(
+  acoes$ = this.service.getOptions('consultar-acoes').pipe(
     catchError(async (error) => this.erroService.trazerErro())
   );
 

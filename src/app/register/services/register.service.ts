@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EnviaEmailService } from 'src/app/services/envia-email.service';
+import { bodyReq } from 'src/assets/util/bodyReq';
+import { environment } from 'src/environments/environment';
 import { OptionsRegister } from '../model/OptionRegister';
 
 @Injectable({
@@ -11,24 +13,23 @@ export class RegisterService {
 
   constructor(private http: HttpClient, private enviaEmailService: EnviaEmailService) { }
 
-  private url_api: string = "http://localhost:3000";
-
   cod!: number;
 
   getOptions(option: string): Observable<any> {
-    return this.http.get<OptionsRegister>(`${this.url_api}/${option}`)
+    const {headers, body} = bodyReq
+    return this.http.post<OptionsRegister>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 
   getUser(userName: string): Observable<any> {
-    return this.http.get<OptionsRegister>(`${this.url_api}/users?usuario=${userName}`)
+    return this.http.get<OptionsRegister>(`${environment.api}/users?usuario=${userName}`)
   }
 
   getUserByEmail(email: string): Observable<any> {
-    return this.http.get<OptionsRegister>(`${this.url_api}/users?email=${email}`)
+    return this.http.get<OptionsRegister>(`${environment.api}/users?email=${email}`)
   }
 
   addUser(user: any): Observable<any> {
-    return this.http.post(`${this.url_api}/users`, user)
+    return this.http.post(`${environment.api}/users`, user)
   }
 
   public enviaEmailRegister(destinatario: string, cod: number){

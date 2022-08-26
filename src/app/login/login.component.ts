@@ -45,12 +45,14 @@ export class LoginComponent implements OnInit {
   private logar(user: any) {
     this.authService
       .login(user)
-      .pipe(catchError(async error => this.errorService.trazerErro()))
+      .pipe(
+        catchError(async error =>
+          this.errorService.erroConsulta("Erro ao consultar o usuário informado, verifique os dados e tente novamente!")
+        )
+      )
       .subscribe(() => {
         this.loading = false;
-        this.authService.redirectUrl
-          ? this.navigate.navegar(this.authService.redirectUrl)
-          : this.navigate.navegarParaConsulta();
+        if (this.authService.isUserAuthenticated()) this.navigate.navegarParaConsulta();
       });
   }
 

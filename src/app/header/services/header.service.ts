@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { bodyReq } from "src/assets/util/bodyReq";
+import { environment } from "src/environments/environment";
 import { OptionsSidenav } from "../sidenav/model/OptionSidenav";
 
 @Injectable({
@@ -9,9 +11,8 @@ import { OptionsSidenav } from "../sidenav/model/OptionSidenav";
 export class HeaderService {
   constructor(private http: HttpClient) {}
 
-  private url_api: string = "http://localhost:3000";
-
   getOptions(option: string): Observable<any> {
-    return this.http.get<OptionsSidenav>(`${this.url_api}/${option}`)
+    const {headers, body} = bodyReq
+    return this.http.post<OptionsSidenav>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 }

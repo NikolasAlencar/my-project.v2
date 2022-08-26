@@ -12,7 +12,7 @@ export class CrivoComponent implements OnInit {
 
   constructor(private service: CrivoService, private errorService: ErrorService){}
 
-  options$ = this.service.getOptions('optionsCrivo').pipe(
+  options$ = this.service.getOptions('options-crivo').pipe(
     catchError(async (error) => this.errorService.trazerErro())
   )
 

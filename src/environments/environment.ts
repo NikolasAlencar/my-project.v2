@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   apiSendEmail: "http://localhost:5000",
-  apiBd: "http://localhost:3000",
-  apiLogin: "http://localhost:3001",
+  api: "http://localhost:3000",
   imagesPath: 'assets',
   name: 'My Project 2'
 };

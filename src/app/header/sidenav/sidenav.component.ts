@@ -13,7 +13,7 @@ import { HeaderService } from "../services/header.service";
 export class SidenavComponent implements OnInit {
   constructor(private router: Router, private service: HeaderService, private errorService: ErrorService) {}
 
-  options$ =  this.service.getOptions('optionsSidenav').pipe(catchError(async (error) => this.errorService.trazerErro()))
+  options$ =  this.service.getOptions('options-sidenav').pipe(catchError(async (error) => this.errorService.trazerErro()))
 
   @Output() exit = new EventEmitter<boolean>()
 

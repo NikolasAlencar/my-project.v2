@@ -4,6 +4,8 @@ import { Observable } from "rxjs";
 import { Client } from "src/assets/model/Client";
 import { retiraEspeciais } from "src/assets/util/retiraEspeciais";
 import { ConsultarAcoes } from "../model/ConsultarAcao";
+import { environment } from "src/environments/environment";
+import { bodyReq } from "src/assets/util/bodyReq";
 
 @Injectable({
   providedIn: "root"
@@ -13,26 +15,25 @@ export class ConsultarService {
 
   private clienteConsultado!: Client;
 
-  private url_api: string = "http://localhost:3000";
-
   getOptions(option: string): Observable<any> {
-    return this.http.get<ConsultarAcoes>(`${this.url_api}/${option}`)
+    const {headers, body} = bodyReq
+    return this.http.post<ConsultarAcoes>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 
   obtemClienteByCpf(cpf: string): Observable<any> {
-    return this.http.get(`${this.url_api}/clientes?cpf=${cpf}`)
+    return this.http.get(`${environment.api}/clientes?cpf=${cpf}`)
   }
 
   obtemClienteByAgenciaEConta(conta: string): Observable<any> {
-    return this.http.get(`${this.url_api}/clientes?conta=${conta}`);
+    return this.http.get(`${environment.api}/clientes?conta=${conta}`);
   }
 
   obtemClienteByCelular(celular: string): Observable<any> {
-    return this.http.get(`${this.url_api}/clientes?celular=${celular}`);
+    return this.http.get(`${environment.api}/clientes?celular=${celular}`);
   }
 
   obtemClienteByid(id: string): Observable<any> {
-    return this.http.get(`${this.url_api}/clientes?id=${id}`);
+    return this.http.get(`${environment.api}/clientes?id=${id}`);
   }
 
   consultar(opcaoSelecionada: string, valorDigitado: string): Observable<any> {

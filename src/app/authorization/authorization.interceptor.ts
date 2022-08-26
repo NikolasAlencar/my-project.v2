@@ -45,7 +45,7 @@ export class AuthorizationInteceptor implements HttpInterceptor {
 
   isUrlNeedsProAuth(url: string): boolean {
     let needProAuth = true;
-    const whiteList = [/login/, /assets/];
+    const whiteList = [/assets/];
 
     for (const whiteUrl of whiteList) {
       if (url.search(whiteUrl) >= 0) {

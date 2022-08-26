@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { bodyReq } from 'src/assets/util/bodyReq';
+import { environment } from 'src/environments/environment';
 import { OptionsCrivo } from '../model/OptionCrivo';
 
 @Injectable({
@@ -10,9 +12,8 @@ export class CrivoService {
 
   constructor(private http: HttpClient) { }
 
-  private url_api: string = "http://localhost:3000";
-
   getOptions(option: string): Observable<any> {
-    return this.http.get<OptionsCrivo>(`${this.url_api}/${option}`)
+    const {headers, body} = bodyReq
+    return this.http.post<OptionsCrivo>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 }
