@@ -14,14 +14,6 @@ const routes: Routes = [
       { path: "crivo", component: CrivoComponent }
     ]
   }
-  // {
-  //   path: "dados-pessoais",
-  //   component: DadosPessoaisComponent
-  // },
-  // {
-  //   path: "crivo",
-  //   component: CrivoComponent
-  // }
 ];
 
 @NgModule({

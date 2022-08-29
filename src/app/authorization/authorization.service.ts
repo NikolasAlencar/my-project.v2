@@ -1,17 +1,16 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, Observable, Subject } from 'rxjs';
-import { User } from './model/user';
-import { UserLogin } from './model/user-login';
-import { environment } from 'src/environments/environment';
-import { ErrorService } from '../services/error.service';
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { User } from "./model/user";
+import { UserLogin } from "./model/user-login";
+import { environment } from "src/environments/environment";
+import { ErrorService } from "../services/error.service";
 
-
-const CACHE_KEY_TOKEN = 'TOKEN';
+const CACHE_KEY_TOKEN = "TOKEN";
 const TOKEN_ENDPOINT = `${environment.api}/auth/login`;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class AuthorizationService {
   public redirectUrl!: string;
@@ -24,10 +23,10 @@ export class AuthorizationService {
       TOKEN_ENDPOINT,
       {
         usuario: user.usuario,
-        senha: user.senha,
+        senha: user.senha
       },
-      { observe: 'response' }
-    )
+      { observe: "response" }
+    );
   }
 
   login(user: UserLogin): Observable<object | User> {
@@ -35,11 +34,11 @@ export class AuthorizationService {
     this.requestToken(user).subscribe(
       (response: HttpResponse<any>) => {
         const { body: loggedUser } = response;
-        loggedUser.token = response.headers.get('x-access-token');
+        loggedUser.token = response.headers.get("x-access-token");
         this.saveUserInfo(loggedUser);
         loginSubject.next(loggedUser);
       },
-      (error) => {
+      error => {
         loginSubject.error(error);
       }
     );
@@ -65,7 +64,7 @@ export class AuthorizationService {
   }
 
   getAuthenticatedUser(): any {
-    return this._user || sessionStorage.getItem(CACHE_KEY_TOKEN)
+    return this._user || sessionStorage.getItem(CACHE_KEY_TOKEN);
   }
 
   isUserAuthenticated(): boolean {

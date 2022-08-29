@@ -1,9 +1,7 @@
-import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { catchError, Subscription } from "rxjs";
+import { catchError } from "rxjs";
 import { AuthorizationService } from "../authorization/authorization.service";
-import { EnviaMensagemService } from "../services/envia-mensagem.service";
 import { ErrorService } from "../services/error.service";
 import { NavigateService } from "../services/navigate.service";
 

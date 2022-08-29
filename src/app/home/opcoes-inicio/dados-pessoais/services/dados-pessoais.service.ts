@@ -2,25 +2,34 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ConsultarService } from 'src/app/consulta/services/consultar.service';
+import { EnviaMensagemService } from 'src/app/services/envia-mensagem.service';
+import { ErrorService } from 'src/app/services/error.service';
+import { bodyReq } from 'src/assets/util/bodyReq';
+import { environment } from 'src/environments/environment';
+
+const {body, headers} = bodyReq
 
 @Injectable({
   providedIn: 'root'
 })
 export class DadosPessoaisService {
 
-  private url_api: string = "http://localhost:3000";
-
   dados$ = new Subject()
 
-  constructor(private consultaService: ConsultarService, private http: HttpClient) { }
+  constructor(private consultaService: ConsultarService,
+              private http: HttpClient,
+              private errorService: ErrorService,
+              private enviaMensagem: EnviaMensagemService) { }
 
   getDados(){
     return this.consultaService.getCliente()
   }
 
-  updateClient(user: any){
-    return this.http.put(`${this.url_api}/clientes/${user.id}`, user).subscribe((user: any) => {
-      delete user?.nomeCompleto
+  updateClient(client: any){
+    delete client?.nomeCompleto
+    return this.http.post(`${environment.api}/update/client`, {client}, {headers})
+    .subscribe(() => {
+      this.enviaMensagem.sucesso(`Cliente ${client?.nome} atualizado com sucesso!`)
     })
   }
 }

@@ -5,7 +5,6 @@ import { catchError, distinctUntilChanged, filter, switchMap } from 'rxjs/operat
 import { NavigateService } from '../services/navigate.service';
 import { RegisterService } from './services/register.service';
 import * as _ from "lodash";
-import { NavigationExtras } from '@angular/router';
 import { randomNum } from 'src/assets/util/randomNum';
 import { ErrorService } from '../services/error.service';
 
@@ -25,7 +24,7 @@ export class RegisterComponent implements OnInit {
   });
 
   options$ = this.service.getOptions('options-register').pipe(
-    catchError(async (error) => this.errorService.trazerErro())
+    catchError(async () => this.errorService.trazerErro())
   )
 
   emailEnviado: boolean = false;

@@ -19,11 +19,7 @@ export class DadosComponent implements OnInit{
     private fb: FormBuilder,
     private consultarService: ConsultarService,
     private dialog: MatDialog
-    ) {
-    //this.subscriberService.updateDataHome.subscribe(data => {
-    //  this.atualizaDados(data);
-    //});
-  }
+    ) {}
 
   public innerWidth = ajustaGrid();
 
@@ -45,7 +41,6 @@ export class DadosComponent implements OnInit{
   @Input() clienteConsultado: any;
   @Output() emiteDados = new EventEmitter<any>();
 
-  //startDate = new Date(2022, 0, 1);
   maxDate = new Date(new Date().getFullYear()-18, 0, 1)
   minDate = new Date(new Date().getFullYear()-80, 0, 1)
 

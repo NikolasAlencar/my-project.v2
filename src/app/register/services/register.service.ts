@@ -6,6 +6,8 @@ import { bodyReq } from 'src/assets/util/bodyReq';
 import { environment } from 'src/environments/environment';
 import { OptionsRegister } from '../model/OptionRegister';
 
+const {headers, body} = bodyReq
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,20 +18,19 @@ export class RegisterService {
   cod!: number;
 
   getOptions(option: string): Observable<any> {
-    const {headers, body} = bodyReq
     return this.http.post<OptionsRegister>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 
-  getUser(userName: string): Observable<any> {
-    return this.http.get<OptionsRegister>(`${environment.api}/users?usuario=${userName}`)
+  getUser(name: string): Observable<any> {
+    return this.http.post(`${environment.api}/obter/user/nome`, {name}, {headers})
   }
 
   getUserByEmail(email: string): Observable<any> {
-    return this.http.get<OptionsRegister>(`${environment.api}/users?email=${email}`)
+    return this.http.post(`${environment.api}/obter/user/email`, {email}, {headers})
   }
 
   addUser(user: any): Observable<any> {
-    return this.http.post(`${environment.api}/users`, user)
+    return this.http.post(`${environment.api}/adicionar/novo-usuario`, {user, title: 'new-user'}, {headers})
   }
 
   public enviaEmailRegister(destinatario: string, cod: number){

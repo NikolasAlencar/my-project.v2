@@ -15,7 +15,7 @@ import * as _ from "lodash";
 })
 export class ConsultaComponent implements OnInit {
   constructor(
-    private fb: FormBuilder, //private telaInicioService: TelaInicioService, private loginService: LoginService,
+    private fb: FormBuilder,
     private service: ConsultarService,
     private navigate: NavigateService,
     private erroService: ErrorService
@@ -67,7 +67,6 @@ export class ConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.consultar.get('radio')?.valueChanges.subscribe(() => this.opcaoSelecionada = this.consultar.get('radio')?.value-1)
-    // this.loginService.isLogged()
     this.navigate.adicionaHistoria()
   }
 }
