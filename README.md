@@ -1,6 +1,6 @@
 # MyProject.V2
 
-Olá, esse projeto foi feito usando Angular 13.2.3.
+Olá, esse projeto foi feito usando Angular 13.
 
 Para utiliza-lo, primeiramente baixe a api de enviar emails(caso queira usa-la) e instale as dependências com npm install.
 
