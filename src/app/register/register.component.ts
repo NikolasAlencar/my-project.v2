@@ -23,12 +23,14 @@ export class RegisterComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   });
 
+  // pega as opções
   options$ = this.service.getOptions('options-register').pipe(
     catchError(async () => this.errorService.trazerErro())
   )
 
   emailEnviado: boolean = false;
 
+  // gera um código, envia o email e navega pro ultimo passo
   cadastrar(){
     this.service.cod = randomNum(100000, 999999)
     this.service.enviaEmailRegister(this.registrar.get('email')?.value, this.service.cod).subscribe(() => {
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
     this.navigate.navegarParaLogin();
   }
 
+  // adiciona os filtros de erro
   adicionarFiltros(abstractControl: AbstractControl, filtro: number, userOrEmail: string){
     return abstractControl?.valueChanges.pipe(
       debounceTime(500),

@@ -6,6 +6,7 @@
       <div class="separator">
         <div *ngFor="let option of optionsDados">
           <mat-grid-tile>
+            <!--poderia quebrar em componentes menores pra economizar código-->
             <mat-form-field
               appearance="outline"
               *ngIf="option.name !== 'dataDeNascimento'; else datepicker"
@@ -37,6 +38,7 @@
       <label>Endereço</label>
       <div class="separator">
         <div *ngFor="let option of optionsEndereco">
+          <!--poderia quebrar em componentes menores pra economizar código-->
           <mat-grid-tile>
             <mat-form-field appearance="outline">
               <mat-label>{{ option.desc }}</mat-label>
@@ -64,7 +66,12 @@
       >
         Consultar novamente
       </button>
-      <button mat-raised-button color="primary" type="submit">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="formulario.invalid"
+      >
         Atualizar dados
       </button>
     </div>

@@ -31,16 +31,17 @@ export class LastStepComponent implements OnInit {
 
   acabouTempo: boolean = false;
 
-  user = this.router.getCurrentNavigation()?.extras as User
+  user = this.router.getCurrentNavigation()?.extras as User // recebe o user por navegação
 
+  // adiciona o usuario, autentica com o token e navega
   cadastrar(): void{
-    this.service.addUser(this.user.params).pipe(
-      catchError(async (error) => this.erroService.trazerErro())
-    )
-    .subscribe((token) => {
-      this.authService.saveUserInfo(token);
-      this.mensagemService.sucesso(`O usuário ${this.user.params.usuario} foi criado!`);
-      this.navigate.navegarParaConsulta();
+    this.service.addUser(this.user.params).subscribe({
+      next: (token) => {
+        this.authService.saveUserInfo(token);
+        this.mensagemService.sucesso(`O usuário ${this.user.params.usuario} foi criado!`);
+        this.navigate.navegarParaConsulta();
+      },
+      error: () => this.erroService.trazerErro()
     })
   }
 
@@ -49,6 +50,7 @@ export class LastStepComponent implements OnInit {
     this.acabouTempo = $event.acabou
   }
 
+  // limpa o input, gera um código e envia pelo email
   reiniciar(){
     this.registrar.get('codigo')?.setValue('')
     this.service.cod = randomNum(100000, 999999)
@@ -56,6 +58,7 @@ export class LastStepComponent implements OnInit {
     .subscribe(() => this.acabouTempo = false)
   }
 
+  // gera erro e não habilita o botão caso o código não esteja correto
   ngOnInit(): void {
     if(this.user){
       this.registrar.get('codigo')?.valueChanges.pipe(

@@ -21,6 +21,10 @@ export class ConsultarService {
     return this.http.post<ConsultarAcoes>(`${environment.api}/obter/options/${option}`, body, {headers})
   }
 
+  obtemClienteByParam(param: any): Observable<any>{ // REDUZINDO AS FUNÇÕES A UMA SÓ E TIRANDO O SWITCH
+    return this.http.post(`${environment.api}/obter/clientes/${param}`, {param}, {headers})
+  }
+
   obtemClienteByCpf(cpf: string): Observable<any> {
     return this.http.post(`${environment.api}/obter/clientes/cpf`, {cpf}, {headers})
   }
