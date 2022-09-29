@@ -1,27 +1,30 @@
 # MyProject.V2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+Olá, esse projeto foi feito usando Angular 13.
 
-## Development server
+Para utiliza-lo, primeiramente baixe a api de enviar emails(caso queira usa-la) e instale as dependências com npm install.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Rodando o projeto
 
-## Code scaffolding
+ - Digite ng serve no terminal do projeto e vá para "http://localhost:4200/".
+ - Digite npm run start-auth no terminal do backend para roda-lo na porta "http://localhost:3000/", possibilitando que a api faça todas as requisições e manipulação de tokens.
+ - Digite npm-start no projeto do repositório "https://github.com/NikolasAlencar/enviar-email" para que o projeto principal use-o nos envios de emails, ele rodará na porta "http://localhost:3030/" - Não esqueça de configurar corretamente a porta da url na api e no projeto.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ * O aplicativo automaticamente reconhecerá qualquer mudança no código e atualizará.
 
-## Build
+## Caso precise de ajuda me contate    
+  
+	Linkedin -> www.linkedin.com/in/nikolas-alencar-234474182/ 
+		ou 
+	Email -> nikolasalencarrs73@gmail.com
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Algumas outras ferramentas/bibliotecas usadas no projeto em geral:
+ - Express.js
+ - Nodemon
+ - Angular 13
+ - RXJS
+ - Angular Material
+ - Json-server
+ - Nodemailer
+ - Body-parser
+ - Ngx-mask
