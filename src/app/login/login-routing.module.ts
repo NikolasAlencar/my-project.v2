@@ -6,9 +6,6 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    data: {
-      header: false
-    }
   }
 ];
 

@@ -44,21 +44,20 @@ export class ConsultaComponent implements OnInit {
     if(this.consultar.controls[opcaoSelecionada].valid){
       this.consultar.markAsUntouched();
       this.service.consultar(formalizaValor(opcaoSelecionada), this.consultar.get(opcaoSelecionada)?.value)
-        .pipe(
-          catchError(async (error) => this.erroService.trazerErro()),
-        )
-        .subscribe((c) => {
-          if(_.isEmpty(c)){
-            this.erroService.erroConsulta('Não foi encontrado dados para a sua pesquisa!');
-            this.loading = false;
-          }else{
-            this.service.setCliente(c)
-            this.loading = false;
-            this.reuse ?
-            this.emiteDados.emit(this.service.getCliente()) :
-            this.navigate.navegarParaHome(this.service.getCliente() as NavigationExtras)
-          }
-      })
+        .subscribe({
+          next: (c) => {
+            if(_.isEmpty(c)){
+              this.erroService.erroConsulta('Não foi encontrado dados para a sua pesquisa!');
+              this.loading = false;
+            }else{
+              this.service.setCliente(c)
+              this.loading = false;
+              this.reuse ?
+              this.emiteDados.emit(this.service.getCliente()) :
+              this.navigate.navegarParaHome(this.service.getCliente() as NavigationExtras)
+            }
+          }, error: () => this.erroService.trazerErro()
+        })
     }else{
        this.consultar.markAllAsTouched();
        this.loading = false;

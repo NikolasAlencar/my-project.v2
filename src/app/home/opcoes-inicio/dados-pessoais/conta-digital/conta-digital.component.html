@@ -4,12 +4,13 @@
       <label>Conta digital</label>
       <div class="separator">
         <div *ngFor="let option of optionsContaDigital">
+          <!--poderia quebrar em componentes menores pra economizar código-->
           <mat-grid-tile>
             <mat-form-field appearance="outline">
               <mat-label>{{ option.desc }}</mat-label>
               <input
                 matInput
-                placeholder="Digite o seu nome completo"
+                placeholder="Consulte um cliente"
                 formControlName="{{ option.name }}"
                 required
                 [readonly]="true"
