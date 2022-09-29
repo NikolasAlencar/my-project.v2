@@ -81,16 +81,16 @@ export class DadosComponent implements OnInit{
     })
   });
 
-  // atualizar dados
   public confirmar(): void {
-    const dataDeNascimento = new Date(this.formulario.value.dataDeNascimento).toLocaleDateString()
-    const nomeSeparado = separaNome(this.formulario.value.nomeCompleto)
-    this.clienteConsultado = Object.assign(this.clienteConsultado, {...this.formulario.value, ...nomeSeparado })
-    this.clienteConsultado.dataDeNascimento = dataDeNascimento
-    this.emiteDados.emit({dados: this.clienteConsultado, update: true})
+    if(this.formulario.valid){
+      const dataDeNascimento = new Date(this.formulario.value.dataDeNascimento).toLocaleDateString()
+      const nomeSeparado = separaNome(this.formulario.value.nomeCompleto)
+      this.clienteConsultado = Object.assign(this.clienteConsultado, {...this.formulario.value, ...nomeSeparado })
+      this.clienteConsultado.dataDeNascimento = dataDeNascimento
+      this.emiteDados.emit({dados: this.clienteConsultado, update: true})
+    }
   }
 
-  // consultar novamente
   public recebeDados($event: any){
     this.clienteConsultado = $event
     this.emiteDados.emit({dados: $event, update: false})
@@ -98,7 +98,6 @@ export class DadosComponent implements OnInit{
     this.populaDados()
   }
 
-  // popula todos os inputs
   populaDados(){
     const dadosGerais = this.optionsDados.concat(this.optionsEndereco)
     dadosGerais.map(option => {
@@ -120,7 +119,8 @@ export class DadosComponent implements OnInit{
       this.populaDados()
     }else{
       this.consultarService.getCliente() ?
-      (this.clienteConsultado = this.consultarService.getCliente(), this.populaDados()) :
+      (this.clienteConsultado = this.consultarService.getCliente(),
+      this.populaDados()) :
       this.abrirConsulta()
     }
   }

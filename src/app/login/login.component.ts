@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { catchError } from "rxjs";
 import { AuthorizationService } from "../authorization/authorization.service";
 import { ErrorService } from "../services/error.service";
 import { NavigateService } from "../services/navigate.service";
@@ -41,15 +42,16 @@ export class LoginComponent implements OnInit {
 
   private logar(user: any) {
     this.authService
-      .login(user).subscribe({
-        next: () => {
-          this.navigate.navegarParaConsulta();
-        },
-        error: () => {
+      .login(user)
+      .pipe(
+        catchError(async error =>
           this.errorService.erroConsulta("Erro ao consultar o usuário informado, verifique os dados e tente novamente!")
-        }
-      })
-      this.loading = false;
+        )
+      )
+      .subscribe(() => {
+        this.loading = false;
+        if (this.authService.isUserAuthenticated()) this.navigate.navegarParaConsulta();
+      });
   }
 
   ngOnInit(): void {

@@ -16,29 +16,32 @@ export class AuthorizationService {
   public redirectUrl!: string;
   private _user: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorService: ErrorService) {}
 
-  // bate na autenticação do backend e retorna o token
   requestToken(user: any): Observable<HttpResponse<User>> {
     return this.http.post<User>(
       TOKEN_ENDPOINT,
-      { ...user },
+      {
+        usuario: user.usuario,
+        senha: user.senha
+      },
       { observe: "response" }
     );
   }
 
-  // pega o token e salva as informações
   login(user: UserLogin): Observable<object | User> {
     const loginSubject = new Subject<User>();
-    this.requestToken(user).subscribe({
-      next: (response: HttpResponse<any>) => {
+    this.requestToken(user).subscribe(
+      (response: HttpResponse<any>) => {
         const { body: loggedUser } = response;
         loggedUser.token = response.headers.get("x-access-token");
         this.saveUserInfo(loggedUser);
         loginSubject.next(loggedUser);
       },
-      error: (error) => loginSubject.error(error)
-    })
+      error => {
+        loginSubject.error(error);
+      }
+    );
     return loginSubject.asObservable();
   }
 

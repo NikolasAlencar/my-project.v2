@@ -11,7 +11,7 @@ import { OptionsContaDigital } from "./model/OptionContaDigital";
   styleUrls: ["./conta-digital.component.scss"]
 })
 export class ContaDigitalComponent implements OnInit {
-
+  
   public innerWidth = ajustaGrid();
 
   @HostListener("window:resize")
@@ -39,10 +39,8 @@ export class ContaDigitalComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    if(this.service.getDados()){
-      this.cliente = this.service.getDados(), this.populaDados()
-      return
-    }
+    this.service.getDados() ?
+    (this.cliente = this.service.getDados(), this.populaDados()) :
     this.clienteConsultado.subscribe(c => {
       this.cliente = c
       this.populaDados()
@@ -50,7 +48,6 @@ export class ContaDigitalComponent implements OnInit {
   }
 
   public populaDados(){
-    // foreach
     this.optionsContaDigital.map((option: any) => {
       this.formulario.get(option.name)?.setValue(this.cliente[option.name])
     })
